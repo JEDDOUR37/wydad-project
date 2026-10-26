@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Unofficial fan site of Wydad Athletic Club: trophies, transfers 2026, squad, results, quiz and more.">
+<meta name="theme-color" content="#CC0000">
+<title>Wydad Athletic Club — Fan Site</title>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  if (sessionStorage.getItem("wydadDemoLoggedIn") !== "true") {
+    window.location.replace("login.html");
+  }
+</script>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img class="logo-img" src="https://images.seeklogo.com/logo-png/43/3/wydad-athletic-club-2022-logo-png_seeklogo-438990.png" alt="Wydad logo" onerror="this.style.display='none'">
+    <div>
+      <h1>Wydad</h1>
+      <span>Athletic Club</span>
+    </div>
+  </div>
+
+  <nav id="mainNav">
+    <a href="#">Home</a>
+    <a href="#matchcenter">Match</a>
+    <a href="#titles">Trophies</a>
+    <a href="#transfers">Transfers</a>
+    <a href="#players-static">Squad</a>
+    <a href="#results">Results</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#guess">Game</a>
+    <a href="#shop">Shop</a>
+  </nav>
+
+  <div class="header-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+    </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-box">
+    <div class="hero-eyebrow">Est. 1937 · Casablanca</div>
+    <h2>
+      <span class="line-1">Pride of</span>
+      <span class="line-2">Casablanca</span>
+    </h2>
+    <p class="hero-sub">22× Botola Champions · 3× CAF Champions League</p>
+    <a href="#titles" class="btn">Explore Trophies</a>
+    <div class="quick-links">
+      <a href="#shop" class="ql">🛒 Shop</a>
+      <a href="https://www.wydadac.ma/en/" target="_blank" rel="noopener noreferrer" class="ql">🌐 Official Site</a>
+      <a href="https://www.espn.com/soccer/team/fixtures/_/id/8625" target="_blank" rel="noopener noreferrer" class="ql">📅 Fixtures</a>
+      <a href="https://www.espn.com/soccer/team/results/_/id/8625/team.wydad-casablanca" target="_blank" rel="noopener noreferrer" class="ql">📋 Results</a>
+      <a href="#transfers" class="ql">🔁 Transfers</a>
+    </div>
+  </div>
+
+  <!-- LATEST RESULTS TICKER (filled by JS from the RESULTS list) -->
+  <div class="live-ticker" id="liveTicker">
+    <span class="live-dot"></span>
+    <span class="live-label">LATEST</span>
+    <div class="ticker-scroll"><span id="tickerText"></span></div>
+  </div>
+</section>
+
+<!-- MATCH CENTER -->
+<section class="matchcenter reveal-section" id="matchcenter">
+  <div class="section-header">
+    <span class="section-label">Next match</span>
+    <h2 class="section-title-lg">Match Center</h2>
+  </div>
+  <div class="mc-card">
+    <div class="mc-comp" id="mcCompetition"></div>
+    <div class="mc-teams">
+      <div class="mc-team" id="mcHome"></div>
+      <div class="mc-vs">WAC  VS    -----</div>
+      <div class="mc-team" id="mcAway"></div>
+    </div>
+    <div class="mc-info"><span id="mcDate"></span><span id="mcVenue"></span></div>
+    <div class="mc-countdown" id="mcCountdown">
+      <div class="mc-box"><b id="mcD">--</b><small>Days</small></div>
+      <div class="mc-box"><b id="mcH">--</b><small>Hours</small></div>
+      <div class="mc-box"><b id="mcM">--</b><small>Min</small></div>
+      <div class="mc-box"><b id="mcS">--</b><small>Sec</small></div>
+    </div>
+    <p class="mc-over hidden" id="mcOver"></p>
+  </div>
+</section>
+
+<!-- TROPHIES -->
+<section class="titles reveal-section" id="titles">
+  <div class="section-header">
+    <span class="section-label">Honours</span>
+    <h2 class="section-title-lg">Wydad Trophies</h2>
+  </div>
+  <div class="titles-container">
+    <div class="title-box reveal-item" onclick="showPopup('Botola Pro','22 titles — Wydad Athletic Club has won 22 Botola Pro league titles, making them the most decorated club in Moroccan football history.')">
+      <img src="img/botola.webp" alt="Botola Pro">
+      <h3>Botola Pro</h3>
+      <p>22</p>
+    </div>
+    <div class="title-box reveal-item" onclick="showPopup('CAF Champions League','3 continental titles: 1992, 2017, 2022. The 2022 final was played in Casablanca against Al Ahly.')">
+      <img src="img/chompion.jpg" alt="CAF Champions League">
+      <h3>CAF Champions League</h3>
+      <p>3</p>
+    </div>
+    <div class="title-box reveal-item" onclick="showPopup('Throne Cup','9 Throne Cups — the most prestigious cup competition in Moroccan football.')">
+      <img src="img/wydad-trone.jpg" alt="Throne Cup">
+      <h3>Throne Cup</h3>
+      <p>9</p>
+    </div>
+    <div class="title-box reveal-item" onclick="showPopup('CAF Super Cup','1 CAF Super Cup — won against the CAF Confederation Cup champions.')">
+      <img src="img/super.jpg" alt="CAF Super Cup">
+      <h3>CAF Super Cup</h3>
+      <p>1</p>
+    </div>
+  </div>
+</section>
+
+<!-- TROPHY POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">×</span>
+    <h2 id="popup-title"></h2>
+    <p id="popup-text"></p>
+  </div>
+</div>
+
+<!-- TRANSFERS (filled by JS) -->
+<section class="transfers reveal-section" id="transfers">
+  <div class="section-header">
+    <span class="section-label">Mercato 2026</span>
+    <h2 class="section-title-lg">Transfers</h2>
+  </div>
+  <div class="transfers-grid">
+    <div class="transfers-col">
+      <h3 class="tr-title in">⬇ Arrivals (Intidabat)</h3>
+      <div id="transfersIn"></div>
+    </div>
+    <div class="transfers-col">
+      <h3 class="tr-title out">⬆ Departures</h3>
+      <div id="transfersOut"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYERS -->
+<section class="players reveal-section" id="players-static">
+  <div class="section-header">
+    <span class="section-label">Squad</span>
+    <h2 class="section-title-lg">Players 2026</h2>
+  </div>
+  <div class="filter">
+    <button class="active" onclick="filterPlayers('all',this)">All</button>
+    <button onclick="filterPlayers('new',this)">New</button>
+    <button onclick="filterPlayers('GK',this)">GK</button>
+    <button onclick="filterPlayers('CB',this)">CB</button>
+    <button onclick="filterPlayers('RB',this)">RB</button>
+    <button onclick="filterPlayers('LB',this)">LB</button>
+    <button onclick="filterPlayers('CDM',this)">CDM</button>
+    <button onclick="filterPlayers('CM',this)">CM</button>
+  </div>
+
+  <div class="players-container" id="playersGrid">
+
+    <div class="player-card reveal-item" data-type="GK">
+      <img src="img/benabid.jpg" alt="El Mehdi Benabid" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=GK'">
+      <div class="player-card-info"><h3>El Mehdi Benabid</h3><p>Goalkeeper</p><small>Morocco</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="RB">
+      <img src="img/moufid.jpg" alt="Mohamed Moufid" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=RB'">
+      <div class="player-card-info"><h3>Mohamed Moufid</h3><p>Right Back</p><small>Morocco</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="CB">
+      <img src="img/sabbar.jpg" alt="Soufiane Sabbar" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CB'">
+      <div class="player-card-info"><h3>Soufiane Sabbar</h3><p>Center Back</p><small>Morocco</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="CDM">
+      <img src="img/amrabat.jpg" alt="Sofiane Amrabat" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CDM'">
+      <div class="player-card-info"><h3>Sofiane Amrabat</h3><p>Def. Midfielder</p><small>Morocco</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="CM">
+      <img src="img/hannouri.jpg" alt="El Hanouri" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CM'">
+      <div class="player-card-info"><h3>El Hanouri</h3><p>Central Mid</p><small>Morocco</small></div>
+    </div>
+
+    <!-- ===== NEW SIGNINGS 2026 ===== -->
+    <div class="player-card reveal-item" data-type="GK" data-new="true" data-from="FUS Rabat" data-note="3-year deal">
+      <span class="badge-new">New</span>
+      <img src="img/images-rachid-ghanimi.jpg" alt="Rachid Ghanimi" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=GK'">
+      <div class="player-card-info"><h3>Rachid Ghanimi</h3><p>Goalkeeper</p><small>Signed from FUS Rabat · 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="CM" data-new="true" data-from="Return" data-note="1-year deal">
+      <span class="badge-new">New</span>
+      <img src="img/hassoni.jpg" alt="Aymane El Hassouni" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CM'">
+      <div class="player-card-info"><h3>Aymane El Hassouni</h3><p>Midfielder</p><small>Returned · 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="CM" data-new="true" data-from="Return" data-note="">
+      <span class="badge-new">New</span>
+      <img src="img/jabran.jpg" alt="Yahya Jabrane" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CM'">
+      <div class="player-card-info"><h3>Yahya Jabrane</h3><p>Midfielder</p><small>Returned · 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="LB" data-new="true" data-from="" data-note="">
+      <span class="badge-new">New</span>
+      <img src="img/jnanlah.jpg" alt="Hamza Jnan Allah" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=LB'">
+      <div class="player-card-info"><h3>Hamza Jnan Allah</h3><p>Left Back</p><small>New signing · 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="NEW" data-new="true" data-from="" data-note="">
+      <span class="badge-new">New</span>
+      <img src="img/attiat-allah.jpg" alt="Yahya Attiat-Allah" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=NEW'">
+      <div class="player-card-info"><h3>Yahya Attiat-Allah</h3><p>New Signing</p><small>Returned · 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="NEW" data-new="true" data-from="Ittihad Yaacoub El Mansour" data-note="3-year deal">
+      <span class="badge-new">New</span>
+      <img src="img/khalofi.jpg" alt="Adil El Khalloufi" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=NEW'">
+      <div class="player-card-info"><h3>Adil El Khalloufi</h3><p>New Signing</p><small>Signed from Ittihad Yaacoub El Mansour · 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="NEW" data-new="true" data-from="" data-note="Joined Aug 2026">
+      <span class="badge-new">New</span>
+      <img src="img/rshdan.jpg" alt="Nizar Al-Rashdan" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=NEW'">
+      <div class="player-card-info"><h3>Nizar Al-Rashdan</h3><p>New Signing</p><small>Joined Aug 2026</small></div>
+    </div>
+
+    <div class="player-card reveal-item" data-type="NEW" data-new="true" data-from="" data-note="">
+      <span class="badge-new">New</span>
+      <img src="img/cofi.jpg" alt="Salaheddine Cofi" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=NEW'">
+      <div class="player-card-info"><h3>Salaheddine Cofi</h3><p>New Signing</p><small>New signing · 2026</small></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESULTS (filled by JS from the RESULTS list) -->
+<section class="matches reveal-section" id="results">
+  <div class="section-header">
+    <span class="section-label">Botola Pro</span>
+    <h2 class="section-title-lg">Latest Results</h2>
+  </div>
+  <div class="matches-container" id="resultsContainer"></div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section reveal-section" id="quiz">
+  <div class="section-header">
+    <span class="section-label">Challenge</span>
+    <h2 class="section-title-lg">Wydad Quiz</h2>
+  </div>
+
+  <div class="quiz-card" id="quiz-start">
+    <div class="quiz-badge">10 Questions</div>
+    <div class="quiz-icon">🏆</div>
+    <h3>Nta Wydadi Asil?</h3>
+    <p>Test lma3riftek 3la Wydad — tarikh, joueurs, trophées w bzaf ktar.</p>
+    <button class="quiz-btn" onclick="startQuiz()">Bda Quiz ▶</button>
+  </div>
+
+  <div class="quiz-card hidden" id="quiz-question">
+    <div class="quiz-meta">
+      <span id="q-counter">Question 1/10</span>
+      <div class="quiz-score-live">⭐ <span id="q-score-live">0</span></div>
+    </div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="q-progress"></div></div>
+    <div class="quiz-timer-wrap"><div class="quiz-timer-ring" id="q-timer-ring"><span id="q-timer">15</span></div></div>
+    <h3 id="q-text"></h3>
+    <div class="quiz-options" id="q-options"></div>
+    <p class="quiz-feedback" id="q-feedback"></p>
+  </div>
+
+  <div class="quiz-card hidden" id="quiz-result">
+    <div class="quiz-icon" id="result-emoji">🏆</div>
+    <h3 id="result-title"></h3>
+    <div class="result-score-big" id="result-score">0/10</div>
+    <p id="result-msg"></p>
+    <div class="result-badges" id="result-badges"></div>
+    <button class="quiz-btn" onclick="resetQuiz()">3awd El3ab 🔄</button>
+  </div>
+</section>
+
+<!-- GUESS THE PLAYER (players come from the cards above) -->
+<section class="guess-section reveal-section" id="guess">
+  <div class="section-header">
+    <span class="section-label">Game</span>
+    <h2 class="section-title-lg">Guess the Player</h2>
+  </div>
+  <div class="quiz-card guess-card">
+    <div class="quiz-meta">
+      <span class="gp-stat">Attempts: <b id="gpTries">0</b>/5</span>
+      <span class="gp-stat">Streak: <b id="gpStreak">0</b> · Best: <b id="gpBest">0</b></span>
+    </div>
+    <div class="gp-photo-wrap">
+      <img id="gpImg" class="gp-photo" src="" alt="Mystery player">
+    </div>
+    <p class="gp-msg" id="gpMsg">Chkoun had l-joueur?</p>
+    <div class="gp-form" id="gpForm">
+      <input type="text" id="gpInput" placeholder="Ktb l-ism" autocomplete="off" aria-label="Player name">
+      <button type="button" class="quiz-btn" id="gpGuess">Guess</button>
+    </div>
+    <button type="button" class="quiz-btn hidden" id="gpNext">Next Player ▶</button>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="shop reveal-section" id="shop">
+  <div class="section-header">
+    <span class="section-label">Fan Shop</span>
+    <h2 class="section-title-lg">Wydad Shop</h2>
+  </div>
+
+  <div class="shop-grid">
+
+    <div class="product-card reveal-item">
+      <span class="badge">Best Seller</span>
+      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <img src="img/3.jpg" alt="Home Jersey 2026" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Jersey'">
+      <div class="product-info">
+        <h3>Home Jersey 2026</h3>
+        <p>Official Wydad Maillot</p>
+        <div class="product-bottom">
+          <span class="price">$59</span>
+          <button class="cart-btn" onclick="addToCart('Home Jersey 2026',59)">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal-item">
+      <span class="badge limited">Limited</span>
+      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <img src="img/cup.jpg" alt="Wydad Cap" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Cap'">
+      <div class="product-info">
+        <h3>Wydad Cap</h3>
+        <p>Premium Cap</p>
+        <div class="product-bottom">
+          <span class="price">$25</span>
+          <button class="cart-btn" onclick="addToCart('Wydad Cap',25)">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal-item">
+      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <img src="img/mug.jpg" alt="Wydad Mug" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Mug'">
+      <div class="product-info">
+        <h3>Wydad Mug</h3>
+        <p>Fans Collection</p>
+        <div class="product-bottom">
+          <span class="price">$15</span>
+          <button class="cart-btn" onclick="addToCart('Wydad Mug',15)">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal-item">
+      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <img src="img/poster.jpg" alt="Ultra Poster" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Poster'">
+      <div class="product-info">
+        <h3>Ultra Poster</h3>
+        <p>Curva Nord Style</p>
+        <div class="product-bottom">
+          <span class="price">$12</span>
+          <button class="cart-btn" onclick="addToCart('Ultra Poster',12)">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CART -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button onclick="toggleCart()" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <h3>Total: $<span id="cartTotal">0</span></h3>
+    <p class="cart-note" id="cartNote"></p>
+    <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+  </div>
+</div>
+
+<button class="floating-cart" onclick="toggleCart()" aria-label="Open cart">
+  🛒
+  <span id="cartCount">0</span>
+</button>
+
+<!-- PLAYER POPUP -->
+<div id="playerPopup" class="player-popup">
+  <div class="popup-box">
+    <span class="close-popup">&times;</span>
+    <img id="popupImg" src="" alt="">
+    <h2 id="popupName"></h2>
+    <p id="popupPosition"></p>
+    <p id="popupCountry"></p>
+    <p id="popupGoals"></p>
+    <p id="popupAssists"></p>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">Wydad AC</span>
+  <p>© 2026 Unofficial fan project · Not affiliated with Wydad Athletic Club · Casablanca, Morocco</p>
+</footer>
+
+
+<script src="js/app.js"></script>
+</body>
+</html>

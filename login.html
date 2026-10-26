@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wydad AC | Login</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <main class="scene" id="scene">
+
+    <!-- Light cone (behind everything) -->
+    <div class="light-beam" aria-hidden="true"></div>
+
+    <!-- Hanging lamp: click it (or the button) to switch the light -->
+    <button type="button" class="lamp" id="lamp" aria-label="Turn the light on" aria-pressed="false">
+      <span class="lamp-cord"></span>
+      <span class="lamp-cap"></span>
+      <span class="lamp-shade"></span>
+      <span class="bulb"></span>
+      <span class="lamp-chain"><i></i></span>
+    </button>
+
+    <p class="hint" id="hint">Click the lamp to turn on the light</p>
+
+    <!-- Login card: hidden until the light is on -->
+    <div class="card-wrap">
+      <div class="card-inner">
+        <section class="login-card" id="loginCard" inert>
+          <!-- Left: club panel -->
+
+            <aside class="brand-panel">
+                <div class="crest"aria-hidden="true">W<span>A</span>C</div>
+                <div class="ball-stage" id="ballstage"aria-hidden=true>
+                    <div class="showckave"></div>
+                    <svg class="ball"id="ball"viewbox="0 0 100 100"></svg>
+                    <defs>
+                        <radialgradient id="ballgrad"cx="35%" cy="30%" r="75%"></radialgradient>
+                        
+                    <stop offset="0" stop-color="#ffffff"/>
+                    <stop offset=".55" stop-color="#e4e4e4"/>
+                    <stop offset="1" stop-color="#8a8a8a"/>
+                  </radialGradient>
+                                    <clipPath id="ballClip"><circle cx="50" cy="50" r="46"/></clipPath>
+                  <path id="pent" d="M0,-11 L10.5,-3.4 L6.5,8.9 L-6.5,8.9 L-10.5,-3.4 Z"/>
+                </defs>
+                <circle cx="50" cy="50" r="46" fill="url(#ballGrad)"/>
+                <g clip-path="url(#ballClip)">
+                  <g fill="#151515">
+                    <use href="#pent" transform="translate(50,50) scale(1.15)"/>
+                    <use href="#pent" transform="translate(50,3) rotate(180) scale(1.15)"/>
+                    <use href="#pent" transform="translate(95,36) rotate(252) scale(1.15)"/>
+                    <use href="#pent" transform="translate(78,92) rotate(324) scale(1.15)"/>
+                    <use href="#pent" transform="translate(22,92) rotate(36) scale(1.15)"/>
+                    <use href="#pent" transform="translate(5,36) rotate(108) scale(1.15)"/>
+                     </g>
+                          <g stroke="#151515" stroke-width="1.5" stroke-linecap="round" fill="none">
+                    <path d="M50 38 L50 13"/><path d="M62.5 47 L84 40"/><path d="M57.5 61 L70 80"/>
+                    <path d="M42.5 61 L30 80"/><path d="M37.5 47 L16 40"/>
+                  </g>
+                </g>
+                    <ellipse cx="36" cy="27" rx="16" ry="9" fill="#fff" opacity=".35" transform="rotate(-30 36 27)"/>
+                <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1"/>
+                <g class="cracks" clip-path="url(#ballClip)" fill="none" stroke="#e10613" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M52 6 L46 28 L57 42 L44 58 L53 73 L47 94"/>
+                  <path d="M57 42 L76 49 L86 64"/>
+                  <path d="M44 58 L24 62"/>
+                </g>
+              </svg>
+              <div class="ball-shadow"></div>
+              <div class="attempts" id="attempts" role="img" aria-label="2 attempts left"><i></i><i></i></div>
+            </div>
+            <div class="brand-copy">
+              <p class="eyebrow">Pride of Casablanca</p>
+              <h2 class="brand-title">DIMA<br>WYDAD</h2>
+            </div>
+            <ul class="club-stats">
+              <li><b>1937</b><span>Founded</span></li>
+              <li><b>22</b><span>Botola Pro titles</span></li>
+              <li><b>3</b><span>CAF Champions League</span></li>
+            </ul>
+          </aside>
+      
+                    <!-- Right: sign in -->
+          <div class="form-panel">
+            <p class="eyebrow">Members area</p>
+            <h1>Welcome back, <em>Wydadi</em></h1>
+            <p class="description">Sign in to enter the club.</p>
+ 
+            <form id="loginForm" novalidate>
+              <div class="field">
+                <label for="username">Username</label>
+                <div class="input-box">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+                  <input id="username" type="text" placeholder="Enter your username"
+                         autocomplete="username" required>
+                </div>
+              </div>
+ 
+              <div class="field">
+                <label for="password">Password</label>
+                <div class="input-box">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                  <input id="password" type="password" placeholder="Enter your password"
+                         autocomplete="current-password" required>
+                  <button type="button" id="showPassword" class="toggle-pass" aria-label="Show password">SHOW</button>
+                </div>
+              </div>
+ 
+              <div class="form-row">
+                <label class="remember"><input type="checkbox" id="remember"> Remember me</label>
+                <button type="button" class="demo-btn" id="fillDemo">Use demo account</button>
+                <button type="button" class="demo-btn" id="guestBtn">Continue as guest</button>
+              </div>
+ 
+              <p id="message" role="alert"></p>
+ 
+              <button class="submit-btn" type="submit">ENTER THE CLUB <span>→</span></button>
+ 
+              <div class="divider"><span>or continue with</span></div>
+ 
+              <div class="social">
+                <button type="button" class="social-btn" data-provider="Google" aria-label="Continue with Google">
+                  <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                  <span>Google</span>
+                </button>
+                <button type="button" class="social-btn" data-provider="Facebook" aria-label="Continue with Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                  <span>Facebook</span>
+                </button>
+                <button type="button" class="social-btn" data-provider="Apple (iCloud)" aria-label="Continue with Apple, iCloud account">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+                  <span>Apple</span>
+                </button>
+              </div>
+            </form>
+ 
+            <p class="fineprint">One club. One passion. <b>Dima Wydad.</b></p>
+          </div>
+ 
+        </section>
+      </div>
+    </div>
+ 
+    <button type="button" id="switchLight" class="switch-light" aria-pressed="false">CLICK TO TURN ON</button>
+ 
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+ 
+  </main>
+ 
+  <script src="js/login.js" defer></script>
+</body>
+</html>
+ 
+
+                    </defs>
+                </div>
+            </aside>
