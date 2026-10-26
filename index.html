@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Unofficial fan site of Wydad Athletic Club: trophies, transfers 2026, squad, results, quiz and more.">
+<meta name="description" data-i18n-attr="content:site.description" content="Unofficial fan site of Wydad Athletic Club: trophies, transfers 2026, squad, results, quiz and more.">
 <meta name="theme-color" content="#CC0000">
-<title>Wydad Athletic Club — Fan Site</title>
+<title data-i18n="site.title">Wydad Athletic Club — Fan Site</title>
 <link rel="stylesheet" href="css/style.css">
 <script>
   if (sessionStorage.getItem("wydadDemoLoggedIn") !== "true") {
@@ -25,22 +25,27 @@
   </div>
 
   <nav id="mainNav">
-    <a href="#">Home</a>
-    <a href="#matchcenter">Match</a>
-    <a href="#titles">Trophies</a>
-    <a href="#transfers">Transfers</a>
-    <a href="#players-static">Squad</a>
-    <a href="#results">Results</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#guess">Game</a>
-    <a href="#shop">Shop</a>
+    <a href="#" data-i18n="nav.home">Home</a>
+    <a href="#matchcenter" data-i18n="nav.match">Match</a>
+    <a href="#titles" data-i18n="nav.trophies">Trophies</a>
+    <a href="#transfers" data-i18n="nav.transfers">Transfers</a>
+    <a href="#players-static" data-i18n="nav.squad">Squad</a>
+    <a href="#results" data-i18n="nav.results">Results</a>
+    <a href="#quiz" data-i18n="nav.quiz">Quiz</a>
+    <a href="#guess" data-i18n="nav.game">Game</a>
+    <a href="#shop" data-i18n="nav.shop">Shop</a>
   </nav>
 
   <div class="header-actions">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <select class="lang-select" data-lang-select aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+      <option value="ar">عربي</option>
+    </select>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" data-i18n-attr="aria-label:theme.toggle">
       <span class="theme-icon">🌙</span>
     </button>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" data-i18n-attr="aria-label:menu.toggle" aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -49,26 +54,26 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-box">
-    <div class="hero-eyebrow">Est. 1937 · Casablanca</div>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Est. 1937 · Casablanca</div>
     <h2>
-      <span class="line-1">Pride of</span>
-      <span class="line-2">Casablanca</span>
+      <span class="line-1" data-i18n="hero.line1">Pride of</span>
+      <span class="line-2" data-i18n="hero.line2">Casablanca</span>
     </h2>
-    <p class="hero-sub">22× Botola Champions · 3× CAF Champions League</p>
-    <a href="#titles" class="btn">Explore Trophies</a>
+    <p class="hero-sub" data-i18n="hero.sub">22× Botola Champions · 3× CAF Champions League</p>
+    <a href="#titles" class="btn" data-i18n="hero.cta">Explore Trophies</a>
     <div class="quick-links">
-      <a href="#shop" class="ql">🛒 Shop</a>
-      <a href="https://www.wydadac.ma/en/" target="_blank" rel="noopener noreferrer" class="ql">🌐 Official Site</a>
-      <a href="https://www.espn.com/soccer/team/fixtures/_/id/8625" target="_blank" rel="noopener noreferrer" class="ql">📅 Fixtures</a>
-      <a href="https://www.espn.com/soccer/team/results/_/id/8625/team.wydad-casablanca" target="_blank" rel="noopener noreferrer" class="ql">📋 Results</a>
-      <a href="#transfers" class="ql">🔁 Transfers</a>
+      <a href="#shop" class="ql"><span aria-hidden="true">🛒</span> <span data-i18n="ql.shop">Shop</span></a>
+      <a href="https://www.wydadac.ma/en/" target="_blank" rel="noopener noreferrer" class="ql"><span aria-hidden="true">🌐</span> <span data-i18n="ql.official">Official Site</span></a>
+      <a href="https://www.espn.com/soccer/team/fixtures/_/id/8625" target="_blank" rel="noopener noreferrer" class="ql"><span aria-hidden="true">📅</span> <span data-i18n="ql.fixtures">Fixtures</span></a>
+      <a href="https://www.espn.com/soccer/team/results/_/id/8625/team.wydad-casablanca" target="_blank" rel="noopener noreferrer" class="ql"><span aria-hidden="true">📋</span> <span data-i18n="ql.results">Results</span></a>
+      <a href="#transfers" class="ql"><span aria-hidden="true">🔁</span> <span data-i18n="ql.transfers">Transfers</span></a>
     </div>
   </div>
 
   <!-- LATEST RESULTS TICKER (filled by JS from the RESULTS list) -->
   <div class="live-ticker" id="liveTicker">
     <span class="live-dot"></span>
-    <span class="live-label">LATEST</span>
+    <span class="live-label" data-i18n="ticker.label">LATEST</span>
     <div class="ticker-scroll"><span id="tickerText"></span></div>
   </div>
 </section>
@@ -76,22 +81,22 @@
 <!-- MATCH CENTER -->
 <section class="matchcenter reveal-section" id="matchcenter">
   <div class="section-header">
-    <span class="section-label">Next match</span>
-    <h2 class="section-title-lg">Match Center</h2>
+    <span class="section-label" data-i18n="match.label">Next match</span>
+    <h2 class="section-title-lg" data-i18n="match.title">Match Center</h2>
   </div>
   <div class="mc-card">
     <div class="mc-comp" id="mcCompetition"></div>
     <div class="mc-teams">
       <div class="mc-team" id="mcHome"></div>
-      <div class="mc-vs">WAC  VS    -----</div>
+      <div class="mc-vs" data-i18n="match.vs">VS</div>
       <div class="mc-team" id="mcAway"></div>
     </div>
     <div class="mc-info"><span id="mcDate"></span><span id="mcVenue"></span></div>
     <div class="mc-countdown" id="mcCountdown">
-      <div class="mc-box"><b id="mcD">--</b><small>Days</small></div>
-      <div class="mc-box"><b id="mcH">--</b><small>Hours</small></div>
-      <div class="mc-box"><b id="mcM">--</b><small>Min</small></div>
-      <div class="mc-box"><b id="mcS">--</b><small>Sec</small></div>
+      <div class="mc-box"><b id="mcD">--</b><small data-i18n="match.days">Days</small></div>
+      <div class="mc-box"><b id="mcH">--</b><small data-i18n="match.hours">Hours</small></div>
+      <div class="mc-box"><b id="mcM">--</b><small data-i18n="match.min">Min</small></div>
+      <div class="mc-box"><b id="mcS">--</b><small data-i18n="match.sec">Sec</small></div>
     </div>
     <p class="mc-over hidden" id="mcOver"></p>
   </div>
@@ -100,28 +105,28 @@
 <!-- TROPHIES -->
 <section class="titles reveal-section" id="titles">
   <div class="section-header">
-    <span class="section-label">Honours</span>
-    <h2 class="section-title-lg">Wydad Trophies</h2>
+    <span class="section-label" data-i18n="trophies.label">Honours</span>
+    <h2 class="section-title-lg" data-i18n="trophies.title">Wydad Trophies</h2>
   </div>
   <div class="titles-container">
-    <div class="title-box reveal-item" onclick="showPopup('Botola Pro','22 titles — Wydad Athletic Club has won 22 Botola Pro league titles, making them the most decorated club in Moroccan football history.')">
+    <div class="title-box reveal-item" onclick="showTrophy('botola')">
       <img src="img/botola.webp" alt="Botola Pro">
-      <h3>Botola Pro</h3>
+      <h3 data-i18n="trophy.botola.name">Botola Pro</h3>
       <p>22</p>
     </div>
-    <div class="title-box reveal-item" onclick="showPopup('CAF Champions League','3 continental titles: 1992, 2017, 2022. The 2022 final was played in Casablanca against Al Ahly.')">
+    <div class="title-box reveal-item" onclick="showTrophy('caf')">
       <img src="img/chompion.jpg" alt="CAF Champions League">
-      <h3>CAF Champions League</h3>
+      <h3 data-i18n="trophy.caf.name">CAF Champions League</h3>
       <p>3</p>
     </div>
-    <div class="title-box reveal-item" onclick="showPopup('Throne Cup','9 Throne Cups — the most prestigious cup competition in Moroccan football.')">
+    <div class="title-box reveal-item" onclick="showTrophy('throne')">
       <img src="img/wydad-trone.jpg" alt="Throne Cup">
-      <h3>Throne Cup</h3>
+      <h3 data-i18n="trophy.throne.name">Throne Cup</h3>
       <p>9</p>
     </div>
-    <div class="title-box reveal-item" onclick="showPopup('CAF Super Cup','1 CAF Super Cup — won against the CAF Confederation Cup champions.')">
+    <div class="title-box reveal-item" onclick="showTrophy('super')">
       <img src="img/super.jpg" alt="CAF Super Cup">
-      <h3>CAF Super Cup</h3>
+      <h3 data-i18n="trophy.super.name">CAF Super Cup</h3>
       <p>1</p>
     </div>
   </div>
@@ -139,16 +144,16 @@
 <!-- TRANSFERS (filled by JS) -->
 <section class="transfers reveal-section" id="transfers">
   <div class="section-header">
-    <span class="section-label">Mercato 2026</span>
-    <h2 class="section-title-lg">Transfers</h2>
+    <span class="section-label" data-i18n="transfers.label">Mercato 2026</span>
+    <h2 class="section-title-lg" data-i18n="transfers.title">Transfers</h2>
   </div>
   <div class="transfers-grid">
     <div class="transfers-col">
-      <h3 class="tr-title in">⬇ Arrivals (Intidabat)</h3>
+      <h3 class="tr-title in"><span aria-hidden="true">⬇</span> <span data-i18n="transfers.in">Arrivals</span></h3>
       <div id="transfersIn"></div>
     </div>
     <div class="transfers-col">
-      <h3 class="tr-title out">⬆ Departures</h3>
+      <h3 class="tr-title out"><span aria-hidden="true">⬆</span> <span data-i18n="transfers.out">Departures</span></h3>
       <div id="transfersOut"></div>
     </div>
   </div>
@@ -157,45 +162,45 @@
 <!-- PLAYERS -->
 <section class="players reveal-section" id="players-static">
   <div class="section-header">
-    <span class="section-label">Squad</span>
-    <h2 class="section-title-lg">Players 2026</h2>
+    <span class="section-label" data-i18n="squad.label">Squad</span>
+    <h2 class="section-title-lg" data-i18n="squad.title">Players 2026</h2>
   </div>
   <div class="filter">
-    <button class="active" onclick="filterPlayers('all',this)">All</button>
-    <button onclick="filterPlayers('new',this)">New</button>
-    <button onclick="filterPlayers('GK',this)">GK</button>
-    <button onclick="filterPlayers('CB',this)">CB</button>
-    <button onclick="filterPlayers('RB',this)">RB</button>
-    <button onclick="filterPlayers('LB',this)">LB</button>
-    <button onclick="filterPlayers('CDM',this)">CDM</button>
-    <button onclick="filterPlayers('CM',this)">CM</button>
+    <button class="active" onclick="filterPlayers('all',this)" data-i18n="filter.all">All</button>
+    <button onclick="filterPlayers('new',this)" data-i18n="filter.new">New</button>
+    <button onclick="filterPlayers('GK',this)" data-i18n="filter.GK">GK</button>
+    <button onclick="filterPlayers('CB',this)" data-i18n="filter.CB">CB</button>
+    <button onclick="filterPlayers('RB',this)" data-i18n="filter.RB">RB</button>
+    <button onclick="filterPlayers('LB',this)" data-i18n="filter.LB">LB</button>
+    <button onclick="filterPlayers('CDM',this)" data-i18n="filter.CDM">CDM</button>
+    <button onclick="filterPlayers('CM',this)" data-i18n="filter.CM">CM</button>
   </div>
 
   <div class="players-container" id="playersGrid">
 
     <div class="player-card reveal-item" data-type="GK">
       <img src="img/benabid.jpg" alt="El Mehdi Benabid" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=GK'">
-      <div class="player-card-info"><h3>El Mehdi Benabid</h3><p>Goalkeeper</p><small>Morocco</small></div>
+      <div class="player-card-info"><h3>El Mehdi Benabid</h3><p data-i18n="pos.GK">Goalkeeper</p><small data-i18n="country.MA">Morocco</small></div>
     </div>
 
     <div class="player-card reveal-item" data-type="RB">
       <img src="img/moufid.jpg" alt="Mohamed Moufid" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=RB'">
-      <div class="player-card-info"><h3>Mohamed Moufid</h3><p>Right Back</p><small>Morocco</small></div>
+      <div class="player-card-info"><h3>Mohamed Moufid</h3><p data-i18n="pos.RB">Right Back</p><small data-i18n="country.MA">Morocco</small></div>
     </div>
 
     <div class="player-card reveal-item" data-type="CB">
       <img src="img/sabbar.jpg" alt="Soufiane Sabbar" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CB'">
-      <div class="player-card-info"><h3>Soufiane Sabbar</h3><p>Center Back</p><small>Morocco</small></div>
+      <div class="player-card-info"><h3>Soufiane Sabbar</h3><p data-i18n="pos.CB">Center Back</p><small data-i18n="country.MA">Morocco</small></div>
     </div>
 
     <div class="player-card reveal-item" data-type="CDM">
       <img src="img/amrabat.jpg" alt="Sofiane Amrabat" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CDM'">
-      <div class="player-card-info"><h3>Sofiane Amrabat</h3><p>Def. Midfielder</p><small>Morocco</small></div>
+      <div class="player-card-info"><h3>Sofiane Amrabat</h3><p data-i18n="pos.CDM">Def. Midfielder</p><small data-i18n="country.MA">Morocco</small></div>
     </div>
 
     <div class="player-card reveal-item" data-type="CM">
       <img src="img/hannouri.jpg" alt="El Hanouri" onerror="this.src='https://placehold.co/260x300/161616/CC0000?text=CM'">
-      <div class="player-card-info"><h3>El Hanouri</h3><p>Central Mid</p><small>Morocco</small></div>
+      <div class="player-card-info"><h3>El Hanouri</h3><p data-i18n="pos.CM">Central Mid</p><small data-i18n="country.MA">Morocco</small></div>
     </div>
 
     <!-- ===== NEW SIGNINGS 2026 ===== -->
@@ -253,8 +258,8 @@
 <!-- RESULTS (filled by JS from the RESULTS list) -->
 <section class="matches reveal-section" id="results">
   <div class="section-header">
-    <span class="section-label">Botola Pro</span>
-    <h2 class="section-title-lg">Latest Results</h2>
+    <span class="section-label" data-i18n="results.label">Botola Pro</span>
+    <h2 class="section-title-lg" data-i18n="results.title">Latest Results</h2>
   </div>
   <div class="matches-container" id="resultsContainer"></div>
 </section>
@@ -262,16 +267,16 @@
 <!-- QUIZ -->
 <section class="quiz-section reveal-section" id="quiz">
   <div class="section-header">
-    <span class="section-label">Challenge</span>
-    <h2 class="section-title-lg">Wydad Quiz</h2>
+    <span class="section-label" data-i18n="quiz.label">Challenge</span>
+    <h2 class="section-title-lg" data-i18n="quiz.title">Wydad Quiz</h2>
   </div>
 
   <div class="quiz-card" id="quiz-start">
-    <div class="quiz-badge">10 Questions</div>
+    <div class="quiz-badge" data-i18n="quiz.badge" data-i18n-vars='{"n":10}'>10 Questions</div>
     <div class="quiz-icon">🏆</div>
-    <h3>Nta Wydadi Asil?</h3>
-    <p>Test lma3riftek 3la Wydad — tarikh, joueurs, trophées w bzaf ktar.</p>
-    <button class="quiz-btn" onclick="startQuiz()">Bda Quiz ▶</button>
+    <h3 data-i18n="quiz.startTitle">Are you a true Wydadi?</h3>
+    <p data-i18n="quiz.intro">Test your knowledge of Wydad — history, players, trophies and more.</p>
+    <button class="quiz-btn" onclick="startQuiz()" data-i18n="quiz.start">Start Quiz ▶</button>
   </div>
 
   <div class="quiz-card hidden" id="quiz-question">
@@ -292,92 +297,92 @@
     <div class="result-score-big" id="result-score">0/10</div>
     <p id="result-msg"></p>
     <div class="result-badges" id="result-badges"></div>
-    <button class="quiz-btn" onclick="resetQuiz()">3awd El3ab 🔄</button>
+    <button class="quiz-btn" onclick="resetQuiz()" data-i18n="quiz.again">Play Again 🔄</button>
   </div>
 </section>
 
 <!-- GUESS THE PLAYER (players come from the cards above) -->
 <section class="guess-section reveal-section" id="guess">
   <div class="section-header">
-    <span class="section-label">Game</span>
-    <h2 class="section-title-lg">Guess the Player</h2>
+    <span class="section-label" data-i18n="guess.label">Game</span>
+    <h2 class="section-title-lg" data-i18n="guess.title">Guess the Player</h2>
   </div>
   <div class="quiz-card guess-card">
     <div class="quiz-meta">
-      <span class="gp-stat">Attempts: <b id="gpTries">0</b>/5</span>
-      <span class="gp-stat">Streak: <b id="gpStreak">0</b> · Best: <b id="gpBest">0</b></span>
+      <span class="gp-stat"><span data-i18n="guess.attempts">Attempts</span>: <b id="gpTries">0</b>/5</span>
+      <span class="gp-stat"><span data-i18n="guess.streak">Streak</span>: <b id="gpStreak">0</b> · <span data-i18n="guess.best">Best</span>: <b id="gpBest">0</b></span>
     </div>
     <div class="gp-photo-wrap">
       <img id="gpImg" class="gp-photo" src="" alt="Mystery player">
     </div>
-    <p class="gp-msg" id="gpMsg">Chkoun had l-joueur?</p>
+    <p class="gp-msg" id="gpMsg" data-i18n="guess.who">Who is this player?</p>
     <div class="gp-form" id="gpForm">
-      <input type="text" id="gpInput" placeholder="Ktb l-ism" autocomplete="off" aria-label="Player name">
-      <button type="button" class="quiz-btn" id="gpGuess">Guess</button>
+      <input type="text" id="gpInput" placeholder="Type the name" autocomplete="off" aria-label="Type the name" data-i18n-attr="placeholder:guess.placeholder;aria-label:guess.placeholder">
+      <button type="button" class="quiz-btn" id="gpGuess" data-i18n="guess.btn">Guess</button>
     </div>
-    <button type="button" class="quiz-btn hidden" id="gpNext">Next Player ▶</button>
+    <button type="button" class="quiz-btn hidden" id="gpNext" data-i18n="guess.next">Next Player ▶</button>
   </div>
 </section>
 
 <!-- SHOP -->
 <section class="shop reveal-section" id="shop">
   <div class="section-header">
-    <span class="section-label">Fan Shop</span>
-    <h2 class="section-title-lg">Wydad Shop</h2>
+    <span class="section-label" data-i18n="shop.label">Fan Shop</span>
+    <h2 class="section-title-lg" data-i18n="shop.title">Wydad Shop</h2>
   </div>
 
   <div class="shop-grid">
 
     <div class="product-card reveal-item">
-      <span class="badge">Best Seller</span>
-      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <span class="badge" data-i18n="badge.best">Best Seller</span>
+      <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/3.jpg" alt="Home Jersey 2026" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Jersey'">
       <div class="product-info">
-        <h3>Home Jersey 2026</h3>
-        <p>Official Wydad Maillot</p>
+        <h3 data-i18n="product.jersey.name">Home Jersey 2026</h3>
+        <p data-i18n="product.jersey.desc">Official Wydad Maillot</p>
         <div class="product-bottom">
           <span class="price">$59</span>
-          <button class="cart-btn" onclick="addToCart('Home Jersey 2026',59)">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Home Jersey 2026',59)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
 
     <div class="product-card reveal-item">
-      <span class="badge limited">Limited</span>
-      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <span class="badge limited" data-i18n="badge.limited">Limited</span>
+      <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/cup.jpg" alt="Wydad Cap" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Cap'">
       <div class="product-info">
-        <h3>Wydad Cap</h3>
-        <p>Premium Cap</p>
+        <h3 data-i18n="product.cap.name">Wydad Cap</h3>
+        <p data-i18n="product.cap.desc">Premium Cap</p>
         <div class="product-bottom">
           <span class="price">$25</span>
-          <button class="cart-btn" onclick="addToCart('Wydad Cap',25)">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Wydad Cap',25)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
 
     <div class="product-card reveal-item">
-      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/mug.jpg" alt="Wydad Mug" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Mug'">
       <div class="product-info">
-        <h3>Wydad Mug</h3>
-        <p>Fans Collection</p>
+        <h3 data-i18n="product.mug.name">Wydad Mug</h3>
+        <p data-i18n="product.mug.desc">Fans Collection</p>
         <div class="product-bottom">
           <span class="price">$15</span>
-          <button class="cart-btn" onclick="addToCart('Wydad Mug',15)">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Wydad Mug',15)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
 
     <div class="product-card reveal-item">
-      <button class="wishlist-btn" aria-label="Add to wishlist" aria-pressed="false">❤</button>
+      <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/poster.jpg" alt="Ultra Poster" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Poster'">
       <div class="product-info">
-        <h3>Ultra Poster</h3>
-        <p>Curva Nord Style</p>
+        <h3 data-i18n="product.poster.name">Ultra Poster</h3>
+        <p data-i18n="product.poster.desc">Curva Nord Style</p>
         <div class="product-bottom">
           <span class="price">$12</span>
-          <button class="cart-btn" onclick="addToCart('Ultra Poster',12)">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Ultra Poster',12)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
@@ -388,18 +393,18 @@
 <!-- CART -->
 <div class="cart-panel" id="cartPanel">
   <div class="cart-header">
-    <h2>Your Cart</h2>
-    <button onclick="toggleCart()" aria-label="Close cart">✕</button>
+    <h2 data-i18n="cart.title">Your Cart</h2>
+    <button onclick="toggleCart()" aria-label="Close cart" data-i18n-attr="aria-label:cart.close">✕</button>
   </div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer">
-    <h3>Total: $<span id="cartTotal">0</span></h3>
+    <h3><span data-i18n="cart.total">Total</span>: $<span id="cartTotal">0</span></h3>
     <p class="cart-note" id="cartNote"></p>
-    <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+    <button class="checkout-btn" id="checkoutBtn" data-i18n="cart.checkout">Checkout</button>
   </div>
 </div>
 
-<button class="floating-cart" onclick="toggleCart()" aria-label="Open cart">
+<button class="floating-cart" onclick="toggleCart()" aria-label="Open cart" data-i18n-attr="aria-label:cart.open">
   🛒
   <span id="cartCount">0</span>
 </button>
@@ -419,10 +424,11 @@
 
 <footer>
   <span class="footer-logo">Wydad AC</span>
-  <p>© 2026 Unofficial fan project · Not affiliated with Wydad Athletic Club · Casablanca, Morocco</p>
+  <p data-i18n="footer.text">© 2026 Unofficial fan project · Not affiliated with Wydad Athletic Club · Casablanca, Morocco</p>
 </footer>
 
 
+<script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

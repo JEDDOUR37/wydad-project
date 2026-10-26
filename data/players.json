@@ -1,0 +1,150 @@
+[
+  {
+    "id": "benabid",
+    "name": "El Mehdi Benabid",
+    "pos": "GK",
+    "country": "MA",
+    "photo": "assets/img/players/benabid.jpg"
+  },
+  {
+    "id": "moufid",
+    "name": "Mohamed Moufid",
+    "pos": "RB",
+    "country": "MA",
+    "photo": "assets/img/players/moufid.jpg"
+  },
+  {
+    "id": "sabbar",
+    "name": "Soufiane Sabbar",
+    "pos": "CB",
+    "country": "MA",
+    "photo": "assets/img/players/sabbar.jpg"
+  },
+  {
+    "id": "amrabat",
+    "name": "Sofiane Amrabat",
+    "pos": "CDM",
+    "country": "MA",
+    "photo": "assets/img/players/amrabat.jpg"
+  },
+  {
+    "id": "hanouri",
+    "name": "El Hanouri",
+    "pos": "CM",
+    "country": "MA",
+    "photo": "assets/img/players/hanouri.jpg",
+    "aliases": [
+      "hannouri",
+      "hanouri"
+    ]
+  },
+  {
+    "id": "ghanimi",
+    "name": "Rachid Ghanimi",
+    "pos": "GK",
+    "photo": "assets/img/players/ghanimi.jpg",
+    "isNew": true,
+    "join": {
+      "type": "signed",
+      "club": "FUS Rabat"
+    },
+    "note": "deal3y"
+  },
+  {
+    "id": "el-hassouni",
+    "name": "Aymane El Hassouni",
+    "pos": "CM",
+    "photo": "assets/img/players/el-hassouni.jpg",
+    "isNew": true,
+    "join": {
+      "type": "returned"
+    },
+    "note": "deal1y",
+    "aliases": [
+      "hassouni",
+      "hassoni"
+    ]
+  },
+  {
+    "id": "jabrane",
+    "name": "Yahya Jabrane",
+    "pos": "CM",
+    "photo": "assets/img/players/jabrane.jpg",
+    "isNew": true,
+    "join": {
+      "type": "returned"
+    },
+    "aliases": [
+      "jabran"
+    ]
+  },
+  {
+    "id": "jnan-allah",
+    "name": "Hamza Jnan Allah",
+    "pos": "LB",
+    "photo": "assets/img/players/jnan-allah.jpg",
+    "isNew": true,
+    "join": {
+      "type": "newSigning"
+    },
+    "aliases": [
+      "jnanallah"
+    ]
+  },
+  {
+    "id": "attiat-allah",
+    "name": "Yahya Attiat-Allah",
+    "pos": "NEW",
+    "photo": "assets/img/players/attiat-allah.jpg",
+    "isNew": true,
+    "join": {
+      "type": "returned"
+    },
+    "aliases": [
+      "attiatallah"
+    ]
+  },
+  {
+    "id": "el-khalloufi",
+    "name": "Adil El Khalloufi",
+    "pos": "NEW",
+    "photo": "assets/img/players/el-khalloufi.jpg",
+    "isNew": true,
+    "join": {
+      "type": "signed",
+      "club": "Ittihad Yaacoub El Mansour"
+    },
+    "note": "deal3y",
+    "aliases": [
+      "khalloufi",
+      "khalofi"
+    ]
+  },
+  {
+    "id": "al-rashdan",
+    "name": "Nizar Al-Rashdan",
+    "pos": "NEW",
+    "photo": "assets/img/players/al-rashdan.jpg",
+    "isNew": true,
+    "join": {
+      "type": "joinedAug"
+    },
+    "aliases": [
+      "rashdan",
+      "alrashdan"
+    ]
+  },
+  {
+    "id": "cofi",
+    "name": "Salaheddine Cofi",
+    "pos": "NEW",
+    "photo": "assets/img/players/cofi.jpg",
+    "isNew": true,
+    "join": {
+      "type": "newSigning"
+    },
+    "aliases": [
+      "cofi"
+    ]
+  }
+]

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
@@ -633,3 +634,11 @@ input::placeholder{color:#6a6a6a}
 @media (prefers-reduced-motion:reduce){
   .grain,.mote{display:none}
 }
+
+/* ===== Language switcher + Arabic (RTL) ===== */
+.lang-select{background:transparent;color:inherit;border:1px solid rgba(128,128,128,.5);border-radius:8px;padding:6px 8px;font:inherit;font-size:.85rem;cursor:pointer}
+.lang-select option{color:#111;background:#fff}
+html[lang="ar"] body,html[lang="ar"] input,html[lang="ar"] button,html[lang="ar"] select{font-family:'Cairo','Inter',sans-serif}
+html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
+.lang-corner{position:fixed;top:14px;inset-inline-end:14px;z-index:60}
+.lang-corner .lang-select{color:#fff;background:rgba(0,0,0,.45)}

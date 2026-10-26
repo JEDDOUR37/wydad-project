@@ -1,0 +1,167 @@
+{
+  "in": [
+    {
+      "name": "Adil El Khalloufi",
+      "fromClub": "Ittihad Yaacoub El Mansour",
+      "note": "deal3y"
+    },
+    {
+      "name": "Rachid Ghanimi",
+      "pos": [
+        "GK"
+      ],
+      "fromClub": "FUS Rabat",
+      "note": "deal3y"
+    },
+    {
+      "name": "Aymane El Hassouni",
+      "pos": [
+        "CM"
+      ],
+      "fromKey": "return",
+      "note": "deal1y"
+    },
+    {
+      "name": "Yahya Jabrane",
+      "fromKey": "return"
+    },
+    {
+      "name": "Yahya Attiat-Allah",
+      "fromKey": "return"
+    },
+    {
+      "name": "Hamza Jnan Allah",
+      "pos": [
+        "LB"
+      ]
+    },
+    {
+      "name": "Nizar Al-Rashdan",
+      "fromCountry": "JO",
+      "note": "joinedAug"
+    },
+    {
+      "name": "Salaheddine Cofi"
+    }
+  ],
+  "out": [
+    {
+      "name": "Hakim Ziyech",
+      "pos": [
+        "CM",
+        "WG"
+      ],
+      "toClub": "Botafogo",
+      "note": "mutual"
+    },
+    {
+      "name": "Noureddine Amrabat",
+      "pos": [
+        "FW",
+        "CM"
+      ],
+      "toClub": "FC Utrecht",
+      "note": "endContract"
+    },
+    {
+      "name": "Zouhair El Moutaraji",
+      "pos": [
+        "WG"
+      ],
+      "note": "endContract"
+    },
+    {
+      "name": "Hamza Sakhi",
+      "pos": [
+        "CM"
+      ],
+      "note": "terminated"
+    },
+    {
+      "name": "Wissam Ben Yedder",
+      "pos": [
+        "ST"
+      ],
+      "note": "departed"
+    },
+    {
+      "name": "Mohamed Rayhi",
+      "pos": [
+        "ST"
+      ],
+      "note": "departed"
+    },
+    {
+      "name": "Amine Aboulfath",
+      "pos": [
+        "DF"
+      ],
+      "toClub": "Al Ahly Benghazi",
+      "note": "transfer"
+    },
+    {
+      "name": "Ayoub Boucheta",
+      "pos": [
+        "DF"
+      ],
+      "note": "departed"
+    },
+    {
+      "name": "Abdelali Mhamdi",
+      "pos": [
+        "GK"
+      ],
+      "note": "departed"
+    },
+    {
+      "name": "Bart Meijers",
+      "pos": [
+        "DF"
+      ],
+      "toCountry": "NL",
+      "note": "departed"
+    },
+    {
+      "name": "Arthur",
+      "pos": [
+        "CM"
+      ],
+      "toCountry": "BR",
+      "note": "departed"
+    },
+    {
+      "name": "Abdelghafour Lamirat",
+      "pos": [
+        "CM"
+      ],
+      "toClub": "RS Berkane",
+      "note": "transfer"
+    },
+    {
+      "name": "Nabil Khali",
+      "pos": [
+        "CM"
+      ],
+      "toClub": "Kawkab Marrakech",
+      "note": "transfer"
+    },
+    {
+      "name": "Mohamed Bouchouari",
+      "pos": [
+        "DF"
+      ],
+      "note": "departedTransfer"
+    },
+    {
+      "name": "Walid Sabbar",
+      "pos": [
+        "CM"
+      ],
+      "note": "transfer"
+    },
+    {
+      "name": "Mohamed El Ouardi",
+      "note": "released"
+    }
+  ]
+}

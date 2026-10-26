@@ -1,5 +1,8 @@
 "use strict";
 
+/* Translation helper (see js/i18n.js) */
+const T = (key, vars) => (window.I18N ? window.I18N.t(key, vars) : key);
+
 /* =========================
    SETTINGS
 ========================= */
@@ -42,9 +45,15 @@ let lockTimer = null;
 /* =========================
    MESSAGES
 ========================= */
+let msgState = null; // last translated message, so it can be re-translated
 function setMessage(text, type) {
+  msgState = null;
   message.textContent = text;
   message.className = type || "";
+}
+function setMessageKey(key, vars, type) {
+  setMessage(T(key, vars), type);
+  msgState = { key, vars, type };
 }
 
 function shakeCard() {
@@ -56,14 +65,18 @@ function shakeCard() {
 /* =========================
    LAMP: light ON shows the login, light OFF hides it
 ========================= */
+function updateLightLabels(on) {
+  lamp.setAttribute("aria-label", T(on ? "lamp.aria.off" : "lamp.aria.on"));
+  switchLight.textContent = T(on ? "login.off" : "login.on");
+}
+
 function setLight(on) {
   scene.classList.toggle("is-on", on);
   loginCard.toggleAttribute("inert", !on); // form is locked while the light is off
 
   lamp.setAttribute("aria-pressed", String(on));
-  lamp.setAttribute("aria-label", on ? "Turn the light off" : "Turn the light on");
   switchLight.setAttribute("aria-pressed", String(on));
-  switchLight.textContent = on ? "CLICK TO TURN OFF" : "CLICK TO TURN ON";
+  updateLightLabels(on);
 
   if (on) {
     window.setTimeout(() => {
@@ -110,11 +123,16 @@ buildDust();
 /* =========================
    SHOW / HIDE PASSWORD
 ========================= */
+function updateShowLabels() {
+  const hidden = password.type === "password";
+  showPassword.textContent = T(hidden ? "login.show" : "login.hide");
+  showPassword.setAttribute("aria-label", T(hidden ? "login.showAria" : "login.hideAria"));
+}
+
 showPassword.addEventListener("click", () => {
   const isHidden = password.type === "password";
   password.type = isHidden ? "text" : "password";
-  showPassword.textContent = isHidden ? "HIDE" : "SHOW";
-  showPassword.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+  updateShowLabels();
 });
 
 /* =========================
@@ -144,10 +162,7 @@ function renderAttempts() {
   attemptsEl.querySelectorAll("i").forEach((dot, i) => {
     dot.classList.toggle("lost", i >= attemptsLeft);
   });
-  attemptsEl.setAttribute(
-    "aria-label",
-    `${attemptsLeft} attempt${attemptsLeft === 1 ? "" : "s"} left`
-  );
+  attemptsEl.setAttribute("aria-label", T("login.attemptsAria", { n: attemptsLeft }));
   ball.classList.toggle("cracked", attemptsLeft > 0 && attemptsLeft < MAX_ATTEMPTS);
 }
 
@@ -300,7 +315,7 @@ function startLockout(until, withEffects) {
       endLockout();
       return;
     }
-    setMessage(`The ball exploded! Too many wrong attempts. Try again in ${secondsLeft}s.`, "error");
+    setMessageKey("login.locked", { s: secondsLeft }, "error");
   };
   tick();
   lockTimer = window.setInterval(tick, 1000);
@@ -324,7 +339,7 @@ function endLockout() {
 
   renderAttempts();
   setControlsDisabled(false);
-  setMessage("A new ball is ready. You can try again.", "info");
+  setMessageKey("login.newBall", null, "info");
 }
 
 /* =========================
@@ -337,7 +352,7 @@ form.addEventListener("submit", (event) => {
   const user = username.value.trim();
 
   if (!user || !password.value) {
-    setMessage("Please enter your username and password.", "error");
+    setMessageKey("login.err.empty", null, "error");
     shakeCard();
     return;
   }
@@ -352,7 +367,7 @@ form.addEventListener("submit", (event) => {
     }
     ball.classList.remove("cracked");
     ball.classList.add("goal"); // GOAL!
-    setMessage("Goal! Welcome to the club. Redirecting…", "success");
+    setMessageKey("login.goal", null, "success");
     setControlsDisabled(true);
     window.setTimeout(() => {
       window.location.href = REDIRECT_TO;
@@ -369,10 +384,7 @@ form.addEventListener("submit", (event) => {
     startLockout(Date.now() + LOCK_SECONDS * 1000, true);
   } else {
     renderAttempts();
-    setMessage(
-      `Incorrect username or password! ${attemptsLeft} attempt left before the ball explodes.`,
-      "warn"
-    );
+    setMessageKey("login.err.wrong", { n: attemptsLeft }, "warn");
     password.focus();
   }
 });
@@ -384,10 +396,7 @@ socialBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     if (isLocked()) return;
     const provider = btn.dataset.provider || "This provider";
-    setMessage(
-      `Demo only: ${provider} sign-in is not connected yet. It needs a server (OAuth).`,
-      "info"
-    );
+    setMessageKey("login.social", { provider }, "info");
   });
 });
 
@@ -413,3 +422,15 @@ document.getElementById("guestBtn")?.addEventListener("click", () => {
   }
   window.location.href = REDIRECT_TO;
 });
+
+/* =========================
+   LANGUAGE (EN / FR / AR)
+========================= */
+function refreshLoginLanguage() {
+  updateLightLabels(scene.classList.contains("is-on"));
+  updateShowLabels();
+  renderAttempts();
+  if (msgState) setMessageKey(msgState.key, msgState.vars, msgState.type);
+}
+document.addEventListener("langchange", refreshLoginLanguage);
+if (window.I18N) window.I18N.init();

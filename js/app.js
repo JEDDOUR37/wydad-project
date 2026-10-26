@@ -6,6 +6,11 @@
    HELPERS
 ========================= */
 const $ = (id) => document.getElementById(id);
+/* Translation helpers (see js/i18n.js) */
+const T = (key, vars) => (window.I18N ? window.I18N.t(key, vars) : key);
+const TR = (text, prefixes) => (window.I18N ? window.I18N.tr(text, prefixes) : text);
+const currentLocale = () => (window.I18N ? window.I18N.locale() : "en-GB");
+let appReady = false;
 function setText(id, text) {
     const el = $(id);
     if (el)
@@ -137,23 +142,28 @@ function initScrollSpy() {
    Source: FotMob, Botola Pro 2026. Update when new matches are played.
 ========================= */
 let RESULTS = [
-    { home: "Wydad", away: "CODM Meknès", score: "0 – 0", result: "draw", comp: "Botola Pro", date: "11 Oct 2026" },
-    { home: "Difaâ El Jadida", away: "Wydad", score: "0 – 2", result: "win", comp: "Botola Pro", date: "3 Oct 2026" },
-    { home: "Wydad", away: "Widad Temara", score: "1 – 3", result: "loss", comp: "Botola Pro", date: "26 Sep 2026" },
-    { home: "Wydad", away: "Union Touarga", score: "1 – 2", result: "loss", comp: "Botola Pro", date: "5 Jul 2026" },
+    { home: "Wydad", away: "CODM Meknès", score: "0 – 0", result: "draw", comp: "Botola Pro", date: "2026-10-11" },
+    { home: "Difaâ El Jadida", away: "Wydad", score: "0 – 2", result: "win", comp: "Botola Pro", date: "2026-10-03" },
+    { home: "Wydad", away: "Widad Temara", score: "1 – 3", result: "loss", comp: "Botola Pro", date: "2026-09-26" },
+    { home: "Wydad", away: "Union Touarga", score: "1 – 2", result: "loss", comp: "Botola Pro", date: "2026-07-05" },
 ];
-const RESULT_LABEL = { win: "Win", draw: "Draw", loss: "Loss" };
+const teamName = (name) => TR(name, ["team."]);
+function fmtDate(d) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d))
+        return d;
+    return new Date(`${d}T12:00:00`).toLocaleDateString(currentLocale(), { day: "numeric", month: "short", year: "numeric" });
+}
 function renderResults() {
     const container = $("resultsContainer");
     if (container) {
         container.innerHTML = RESULTS.map((m) => `
             <div class="match-card ${m.result} reveal-item">
-                <h3>${esc(m.home)} ${esc(m.score)} ${esc(m.away)}</h3>
-                <span>${RESULT_LABEL[m.result]}</span>
-                <small>${esc(m.comp)} · ${esc(m.date)}</small>
+                <h3>${esc(teamName(m.home))} <bdi>${esc(m.score)}</bdi> ${esc(teamName(m.away))}</h3>
+                <span>${esc(T("result." + m.result))}</span>
+                <small>${esc(TR(m.comp, ["comp."]))} · ${esc(fmtDate(m.date))}</small>
             </div>`).join("");
     }
-    setText("tickerText", RESULTS.map((m) => `${m.home} ${m.score} ${m.away}`).join("  ·  "));
+    setText("tickerText", RESULTS.map((m) => `${teamName(m.home)} ${m.score} ${teamName(m.away)}`).join("  ·  "));
     initScrollReveal();
 }
 /* =========================
@@ -194,6 +204,9 @@ function showPopup(title, text) {
     if (popup)
         popup.style.display = "flex";
 }
+function showTrophy(id) {
+    showPopup(T(`trophy.${id}.name`), T(`trophy.${id}.text`));
+}
 function closePopup() {
     document.querySelectorAll(".popup").forEach((p) => {
         p.style.display = "none";
@@ -203,17 +216,21 @@ function closePopup() {
    QUIZ
 ========================= */
 const QUESTIONS = [
-    { q: "Fin ta2assas Wydad Athletic Club?", opts: ["1937", "1929", "1945", "1952"], ans: 0, fact: "Wydad ta2asas f 1937 f Casablanca." },
-    { q: "Chhal marra rbe7 Wydad Botola Pro?", opts: ["18", "20", "22", "25"], ans: 2, fact: "22 btoula — akthar nadi f tarikh lkora lmaghribiya." },
-    { q: "Fin kat-l3ab Wydad matches dialo?", opts: ["Stade Mohamed V", "Stade d'Honneur", "Complexe Prince Moulay Abdellah", "Stade de Fès"], ans: 0, fact: "Stade Mohamed V f Casablanca — dar Wydad." },
-    { q: "Chhal marra rbe7 Wydad CAF Champions League?", opts: ["1", "2", "3", "4"], ans: 2, fact: "3 marrat: 1992, 2017, 2022." },
-    { q: "Ach hiya couleur dial Wydad?", opts: ["Zra9 w byed", "A7mar w byed", "Khdra w byed", "A7mar w lkhdar"], ans: 1, fact: "A7mar w byed — couleurs dial Wydad." },
-    { q: "Chkoun houa l attaquant Francawi li ja l Wydad?", opts: ["Karim Benzema", "Wissam Ben Yedder", "Moussa Dembélé", "Alexandre Lacazette"], ans: 1, fact: "Wissam Ben Yedder — ex-Monaco w France NT, ja l Wydad f 2025." },
-    { q: "Fin kan Wydad finals dial CAF Champions League 2022?", opts: ["Cairo", "Casablanca", "Dakar", "Johannesburg"], ans: 1, fact: "Final 2022 l3bat f Stade Mohamed V — derby africain m3a Al Ahly." },
-    { q: "Chkoun houa l milieu défensif l maghribi li ja l Wydad?", opts: ["Amine Harit", "Sofiane Amrabat", "Azzedine Ounahi", "Selim Amallah"], ans: 1, fact: "Sofiane Amrabat — star dial Mondial 2022, CDM qawi bzaf." },
-    { q: "Chhal marra rbe7 Wydad Coupe du Trône?", opts: ["6", "7", "9", "11"], ans: 2, fact: "9 Coupes du Trône — trophée presti9i f lkora lmaghribiya." },
-    { q: "Chkoun houa l ailier droit l maghribi l machi3 li ja l Wydad?", opts: ["Nordin Amrabat", "Hakim Ziyach", "Zakaria Aboukhlal", "Youssef En-Nesyri"], ans: 1, fact: "Hakim Ziyach — international Maroc, ja l Wydad f 2025." },
+    { id: "q1", ans: 0 },
+    { id: "q2", ans: 2 },
+    { id: "q3", ans: 0 },
+    { id: "q4", ans: 2 },
+    { id: "q5", ans: 1 },
+    { id: "q6", ans: 1 },
+    { id: "q7", ans: 1 },
+    { id: "q8", ans: 1 },
+    { id: "q9", ans: 2 },
+    { id: "q10", ans: 1 },
 ];
+/** Question text, options and fact in the current language (from data/lang/xx.json). */
+function quizText(q) {
+    return window.I18N?.quiz(q.id) ?? { q: q.id, opts: [], fact: "" };
+}
 const QUESTION_SECONDS = 15;
 const NEXT_DELAY_MS = 2200;
 let currentQ = 0;
@@ -240,9 +257,9 @@ function loadQuestion() {
         return;
     answered = false;
     timeLeft = QUESTION_SECONDS;
-    setText("q-counter", `Question ${currentQ + 1}/${shuffled.length}`);
+    setText("q-counter", T("quiz.counter", { n: currentQ + 1, total: shuffled.length }));
     setText("q-score-live", String(score));
-    setText("q-text", q.q);
+    setText("q-text", quizText(q).q);
     setText("q-timer", String(timeLeft));
     const progress = $("q-progress");
     if (progress)
@@ -256,7 +273,7 @@ function loadQuestion() {
     const optsEl = $("q-options");
     if (optsEl) {
         optsEl.innerHTML = "";
-        q.opts.forEach((opt, i) => {
+        quizText(q).opts.forEach((opt, i) => {
             const btn = document.createElement("button");
             btn.className = "quiz-opt";
             btn.textContent = opt;
@@ -294,7 +311,7 @@ function selectAnswer(idx) {
         setText("q-score-live", String(score));
         if (feedback) {
             feedback.className = "quiz-feedback show correct-fb";
-            feedback.textContent = "✓ Correct! " + q.fact;
+            feedback.textContent = T("quiz.correct") + " " + quizText(q).fact;
         }
     }
     else {
@@ -302,7 +319,7 @@ function selectAnswer(idx) {
         opts[q.ans]?.classList.add("correct");
         if (feedback) {
             feedback.className = "quiz-feedback show wrong-fb";
-            feedback.textContent = "✗ Ghalta. " + q.fact;
+            feedback.textContent = T("quiz.wrong") + " " + quizText(q).fact;
         }
     }
     window.setTimeout(nextQuestion, NEXT_DELAY_MS);
@@ -318,7 +335,7 @@ function forceTimeout() {
     const feedback = $("q-feedback");
     if (feedback) {
         feedback.className = "quiz-feedback show wrong-fb";
-        feedback.textContent = "⏱ Wqt inte9a! " + q.fact;
+        feedback.textContent = T("quiz.timeout") + " " + quizText(q).fact;
     }
     window.setTimeout(nextQuestion, NEXT_DELAY_MS);
 }
@@ -337,28 +354,25 @@ function showResult() {
     const total = shuffled.length;
     const pct = score / total;
     let emoji = "😔";
-    let title = "Mzyan, 3awd 3awel!";
-    let msg = "Ma3endakch bzzaf d lma3lomat 3la Wydad. Qra zwidan!";
+    let tier = "r0";
     if (pct === 1) {
         emoji = "🏆";
-        title = "Wydadi 100%!";
-        msg = "Perfect! Nta mochaji3 asil dial Wydad, ma kaynch 7aja khasak tat3llmha!";
+        tier = "r4";
     }
     else if (pct >= 0.8) {
         emoji = "🔥";
-        title = "Chwiya dak she!";
-        msg = "Bra3ti! Ma baghalakch ghir su2elin b9aw.";
+        tier = "r3";
     }
     else if (pct >= 0.6) {
         emoji = "👏";
-        title = "Mzyan bzaf!";
-        msg = "Des bonnes connaissances mais zid t9ra 3la Wydad!";
+        tier = "r2";
     }
     else if (pct >= 0.4) {
         emoji = "⚽";
-        title = "Ma ybas!";
-        msg = "Noss noss — hssn shwiya w 3awd 3awel.";
+        tier = "r1";
     }
+    const title = T(`quiz.${tier}.title`);
+    const msg = T(`quiz.${tier}.msg`);
     setText("result-emoji", emoji);
     setText("result-title", title);
     setText("result-score", `${score}/${total}`);
@@ -369,18 +383,34 @@ function showResult() {
     badgesEl.innerHTML = "";
     const earned = [];
     if (score === total)
-        earned.push({ label: "Perfect Score", gold: true });
+        earned.push({ label: T("quiz.badge.perfect"), gold: true });
     if (score >= Math.ceil(total * 0.8))
-        earned.push({ label: "Wydadi 3arif", gold: true });
+        earned.push({ label: T("quiz.badge.expert"), gold: true });
     if (score >= 1)
-        earned.push({ label: "Joueur", gold: false });
-    earned.push({ label: `${score} Correct`, gold: score >= 7 });
+        earned.push({ label: T("quiz.badge.player"), gold: false });
+    earned.push({ label: T("quiz.badge.correct", { n: score }), gold: score >= 7 });
     earned.forEach((b) => {
         const el = document.createElement("span");
         el.className = "result-badge" + (b.gold ? " gold" : "");
         el.textContent = b.label;
         badgesEl.appendChild(el);
     });
+}
+function refreshQuizLanguage() {
+    if (!$("quiz-question")?.classList.contains("hidden")) {
+        const q = shuffled[currentQ];
+        if (q) {
+            const qt = quizText(q);
+            setText("q-counter", T("quiz.counter", { n: currentQ + 1, total: shuffled.length }));
+            setText("q-text", qt.q);
+            document.querySelectorAll("#q-options .quiz-opt").forEach((b, i) => {
+                if (qt.opts[i] !== undefined)
+                    b.textContent = qt.opts[i];
+            });
+        }
+    }
+    if (!$("quiz-result")?.classList.contains("hidden"))
+        showResult();
 }
 function resetQuiz() {
     showPanel("quiz-start");
@@ -416,9 +446,11 @@ function saveCart() {
     }
 }
 let cart = loadCart();
+let cartNoteKey = "";
 function addToCart(name, price) {
     cart.push({ name, price });
     saveCart();
+    cartNoteKey = "";
     setText("cartNote", "");
     updateCart();
 }
@@ -439,13 +471,14 @@ function updateCart() {
         row.className = "cart-item";
         const info = document.createElement("div");
         const title = document.createElement("h4");
-        title.textContent = item.name;
+        const shownName = TR(item.name, ["product."]);
+        title.textContent = shownName;
         const price = document.createElement("p");
         price.textContent = `$${item.price}`;
         info.append(title, price);
         const remove = document.createElement("button");
         remove.type = "button";
-        remove.setAttribute("aria-label", `Remove ${item.name}`);
+        remove.setAttribute("aria-label", T("cart.remove", { name: shownName }));
         remove.textContent = "✕";
         remove.addEventListener("click", () => removeItem(index));
         row.append(info, remove);
@@ -466,9 +499,8 @@ function initShop() {
         });
     });
     $("checkoutBtn")?.addEventListener("click", () => {
-        setText("cartNote", cart.length === 0
-            ? "Your cart is empty."
-            : "Demo shop: online checkout is not available yet.");
+        cartNoteKey = cart.length === 0 ? "cart.empty" : "cart.demo";
+        setText("cartNote", T(cartNoteKey));
     });
 }
 /* =========================
@@ -489,8 +521,8 @@ document.addEventListener("click", (e) => {
     setLine("popupPosition", card.querySelector("p")?.textContent ?? "");
     setLine("popupCountry", card.querySelector("small")?.textContent ?? "");
     if (card.dataset.new === "true") {
-        setLine("popupGoals", card.dataset.from ? "From : " + card.dataset.from : "");
-        setLine("popupAssists", card.dataset.note ?? "");
+        setLine("popupGoals", card.dataset.from ? T("player.from", { club: card.dataset.from }) : "");
+        setLine("popupAssists", TR(card.dataset.note ?? "", ["note."]));
     }
     else {
         setLine("popupGoals", "");
@@ -544,6 +576,8 @@ const TRANSFERS_OUT = [
     { name: "Walid Sabbar", pos: "Midfielder", to: "", note: "Transfer" },
     { name: "Mohamed El Ouardi", pos: "", to: "", note: "Released" },
 ];
+const trPos = (s) => s.split(" / ").map((x) => TR(x, ["pos."])).join(" / ");
+const trPlace = (s) => TR(s, ["transfer.return", "country."]);
 function renderTransferList(list, type, containerId) {
     const el = $(containerId);
     if (!el) {
@@ -551,12 +585,12 @@ function renderTransferList(list, type, containerId) {
         return;
     }
     if (list.length === 0) {
-        el.innerHTML = '<p class="tr-empty">Ma kayn walo f had l-wa9t.</p>';
+        el.innerHTML = `<p class="tr-empty">${esc(T("transfers.empty"))}</p>`;
         return;
     }
     el.innerHTML = list
         .map((p) => {
-        const meta = [p.pos, type === "in" ? p.from : p.to]
+        const meta = [trPos(p.pos), trPlace(type === "in" ? p.from : p.to)]
             .filter((s) => Boolean(s))
             .map(esc)
             .join(" · ");
@@ -566,7 +600,7 @@ function renderTransferList(list, type, containerId) {
                     <h4>${esc(p.name)}</h4>
                     <small>${meta}</small>
                 </div>
-                ${p.note ? `<span class="tr-tag">${esc(p.note)}</span>` : ""}
+                ${p.note ? `<span class="tr-tag">${esc(TR(p.note, ["note."]))}</span>` : ""}
             </div>`;
     })
         .join("");
@@ -583,33 +617,49 @@ function renderTransfers() {
 function pad(n) {
     return String(n).padStart(2, "0");
 }
-function showMatchMessage(text) {
-    setText("mcOver", text);
+let mcMsgKey = "";
+let mcMatch = null;
+let mcTarget = 0;
+function showMatchMessage(key) {
+    mcMsgKey = key;
+    setText("mcOver", T(key));
     $("mcOver")?.classList.remove("hidden");
     $("mcCountdown")?.classList.add("hidden");
+}
+function renderMatchInfo() {
+    if (!mcMatch)
+        return;
+    setText("mcCompetition", TR(mcMatch.competition, ["comp."]));
+    setText("mcHome", TR(mcMatch.home, ["team."]));
+    setText("mcAway", TR(mcMatch.away, ["team."]));
+    setText("mcVenue", mcMatch.venue);
+    setText("mcDate", new Date(mcTarget).toLocaleString(currentLocale(), { dateStyle: "full", timeStyle: "short" }));
+}
+function refreshMatchLanguage() {
+    renderMatchInfo();
+    if (mcMsgKey)
+        setText("mcOver", T(mcMsgKey));
 }
 function initMatchCenter() {
     if (!$("matchcenter"))
         return;
     const match = window.WYDAD_NEXT_MATCH ?? null;
     if (!match) {
-        showMatchMessage("Next match date coming soon — check the Fixtures link.");
+        showMatchMessage("match.soon");
         return;
     }
     const target = new Date(match.dateISO).getTime();
     if (Number.isNaN(target)) {
-        showMatchMessage("Invalid match date in data/match.json (dateISO).");
+        showMatchMessage("match.invalid");
         return;
     }
-    setText("mcCompetition", match.competition);
-    setText("mcHome", match.home);
-    setText("mcAway", match.away);
-    setText("mcVenue", match.venue);
-    setText("mcDate", new Date(target).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" }));
+    mcMatch = match;
+    mcTarget = target;
+    renderMatchInfo();
     const tick = () => {
         const diff = target - Date.now();
         if (diff <= 0) {
-            showMatchMessage("Kick-off time has passed — update data/match.json with the next match.");
+            showMatchMessage("match.passed");
             return false;
         }
         const s = Math.floor(diff / 1000);
@@ -631,6 +681,11 @@ function initMatchCenter() {
    Players come automatically from the cards in #playersGrid
    (only those whose photo file really exists).
 ========================= */
+let guessMsg = null;
+function gpSay(key, vars) {
+    guessMsg = { key, vars };
+    setText("gpMsg", T(key, vars));
+}
 const GUESS_ALIASES = {
     "img/hannouri.jpg": ["hannouri", "hanouri"],
 };
@@ -706,7 +761,7 @@ async function initGuessGame() {
     const loadable = await Promise.all(candidates.map((p) => canLoadImage(p.img)));
     const pool = candidates.filter((_p, i) => loadable[i]);
     if (pool.length === 0) {
-        setText("gpMsg", "Zid sowar dial l-joueurs f img/ bach tkhdem l-lo3ba.");
+        gpSay("guess.addPhotos");
         form.classList.add("hidden");
         return;
     }
@@ -746,7 +801,7 @@ async function initGuessGame() {
         guessBtn.disabled = false;
         form.classList.remove("hidden");
         nextBtn.classList.add("hidden");
-        setText("gpMsg", "Chkoun had l-joueur?");
+        gpSay("guess.who");
         updateStats();
     };
     const submit = () => {
@@ -754,7 +809,7 @@ async function initGuessGame() {
             return;
         const value = input.value;
         if (!value.trim()) {
-            setText("gpMsg", "Ktb ism l-joueur.");
+            gpSay("guess.enter");
             return;
         }
         if (isCorrectGuess(current, value)) {
@@ -763,19 +818,19 @@ async function initGuessGame() {
                 best = streak;
                 saveGuessBest(best);
             }
-            setText("gpMsg", `✓ Brav! Howa ${current.name}`);
+            gpSay("guess.right", { name: current.name });
             finishRound();
             return;
         }
         tries++;
         if (tries >= GUESS_MAX_TRIES) {
             streak = 0;
-            setText("gpMsg", `✗ Salat l-m7awalat. L-jawab: ${current.name}`);
+            gpSay("guess.out", { name: current.name });
             finishRound();
             return;
         }
         img.style.filter = `blur(${blurFor(tries)}px) grayscale(1)`;
-        setText("gpMsg", `✗ Ghalat. Bqa lik ${GUESS_MAX_TRIES - tries} m7awalat.`);
+        gpSay("guess.wrong", { n: GUESS_MAX_TRIES - tries });
         updateStats();
         input.select();
     };
@@ -810,6 +865,24 @@ async function loadJSON(path, fallback) {
     }
 }
 /* =========================
+   LANGUAGE CHANGE: re-draw everything that JS generated
+========================= */
+function refreshLanguage() {
+    safe("results", renderResults);
+    safe("transfers", renderTransfers);
+    safe("cart", updateCart);
+    if (cartNoteKey)
+        setText("cartNote", T(cartNoteKey));
+    safe("match center", refreshMatchLanguage);
+    safe("quiz", refreshQuizLanguage);
+    if (guessMsg)
+        setText("gpMsg", T(guessMsg.key, guessMsg.vars));
+}
+document.addEventListener("langchange", () => {
+    if (appReady)
+        refreshLanguage();
+});
+/* =========================
    INIT  (each step is isolated: one failure never stops the others)
 ========================= */
 function safe(label, fn) {
@@ -821,6 +894,7 @@ function safe(label, fn) {
     }
 }
 document.addEventListener("DOMContentLoaded", async () => {
+    await window.I18N?.init();
     safe("theme", initTheme);
     RESULTS = await loadJSON("data/results.json", RESULTS);
     const matchData = await loadJSON("data/match.json", { next: null });
@@ -833,6 +907,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     safe("scroll reveal", initScrollReveal);
     safe("scroll spy", initScrollSpy);
     void initGuessGame().catch((err) => console.error("[WYDAD] guess game failed:", err));
+    appReady = true;
 });// =====================================================
 //  NEXT MATCH  -  the only thing you edit for Match Center
 // -----------------------------------------------------

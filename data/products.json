@@ -1,0 +1,108 @@
+[
+  {
+    "id": "jersey",
+    "price": 59,
+    "badge": "best",
+    "image": "assets/img/shop/jersey.jpg",
+    "options": [
+      {
+        "id": "kit",
+        "choices": [
+          {
+            "id": "home"
+          },
+          {
+            "id": "away"
+          },
+          {
+            "id": "third"
+          }
+        ]
+      },
+      {
+        "id": "size",
+        "choices": [
+          {
+            "id": "S"
+          },
+          {
+            "id": "M"
+          },
+          {
+            "id": "L"
+          },
+          {
+            "id": "XL"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cap",
+    "price": 25,
+    "badge": "limited",
+    "image": "assets/img/shop/cap.jpg",
+    "options": [
+      {
+        "id": "color",
+        "choices": [
+          {
+            "id": "red"
+          },
+          {
+            "id": "black"
+          },
+          {
+            "id": "white"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mug",
+    "price": 15,
+    "image": "assets/img/shop/mug.jpg",
+    "options": [
+      {
+        "id": "design",
+        "choices": [
+          {
+            "id": "crest"
+          },
+          {
+            "id": "ultras"
+          },
+          {
+            "id": "since1937"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "poster",
+    "price": 12,
+    "image": "assets/img/shop/poster.jpg",
+    "options": [
+      {
+        "id": "format",
+        "choices": [
+          {
+            "id": "a3",
+            "price": 12
+          },
+          {
+            "id": "a2",
+            "price": 16
+          },
+          {
+            "id": "a1",
+            "price": 22
+          }
+        ]
+      }
+    ]
+  }
+]

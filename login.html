@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wydad AC | Login</title>
+  <title data-i18n="login.title">Wydad AC | Login</title>
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+
+  <div class="lang-corner">
+    <select class="lang-select" data-lang-select aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+      <option value="ar">عربي</option>
+    </select>
+  </div>
 
   <main class="scene" id="scene">
 
@@ -22,12 +30,12 @@
       <span class="lamp-chain"><i></i></span>
     </button>
 
-    <p class="hint" id="hint">Click the lamp to turn on the light</p>
+    <p class="hint" id="hint" data-i18n="login.hint">Click the lamp to turn on the light</p>
 
     <!-- Login card: hidden until the light is on -->
     <div class="card-wrap">
       <div class="card-inner">
-        <section class="login-card" id="loginCard" inert>
+        <section class="login-card" id="loginCard" data-rtl-scope inert>
           <!-- Left: club panel -->
 
             <aside class="brand-panel">
@@ -72,53 +80,53 @@
               <div class="attempts" id="attempts" role="img" aria-label="2 attempts left"><i></i><i></i></div>
             </div>
             <div class="brand-copy">
-              <p class="eyebrow">Pride of Casablanca</p>
-              <h2 class="brand-title">DIMA<br>WYDAD</h2>
+              <p class="eyebrow" data-i18n="login.slogan">Pride of Casablanca</p>
+              <h2 class="brand-title"><span data-i18n="login.brand1">DIMA</span><br><span data-i18n="login.brand2">WYDAD</span></h2>
             </div>
             <ul class="club-stats">
-              <li><b>1937</b><span>Founded</span></li>
-              <li><b>22</b><span>Botola Pro titles</span></li>
-              <li><b>3</b><span>CAF Champions League</span></li>
+              <li><b>1937</b><span data-i18n="login.founded">Founded</span></li>
+              <li><b>22</b><span data-i18n="login.botola">Botola Pro titles</span></li>
+              <li><b>3</b><span data-i18n="login.caf">CAF Champions League</span></li>
             </ul>
           </aside>
       
                     <!-- Right: sign in -->
           <div class="form-panel">
-            <p class="eyebrow">Members area</p>
-            <h1>Welcome back, <em>Wydadi</em></h1>
-            <p class="description">Sign in to enter the club.</p>
+            <p class="eyebrow" data-i18n="login.members">Members area</p>
+            <h1><span data-i18n="login.welcome">Welcome back,</span> <em data-i18n="login.welcomeName">Wydadi</em></h1>
+            <p class="description" data-i18n="login.sub">Sign in to enter the club.</p>
  
             <form id="loginForm" novalidate>
               <div class="field">
-                <label for="username">Username</label>
+                <label for="username" data-i18n="login.username">Username</label>
                 <div class="input-box">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-                  <input id="username" type="text" placeholder="Enter your username"
+                  <input id="username" type="text" placeholder="Enter your username" data-i18n-attr="placeholder:login.usernamePh"
                          autocomplete="username" required>
                 </div>
               </div>
  
               <div class="field">
-                <label for="password">Password</label>
+                <label for="password" data-i18n="login.password">Password</label>
                 <div class="input-box">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-                  <input id="password" type="password" placeholder="Enter your password"
+                  <input id="password" type="password" placeholder="Enter your password" data-i18n-attr="placeholder:login.passwordPh"
                          autocomplete="current-password" required>
                   <button type="button" id="showPassword" class="toggle-pass" aria-label="Show password">SHOW</button>
                 </div>
               </div>
  
               <div class="form-row">
-                <label class="remember"><input type="checkbox" id="remember"> Remember me</label>
-                <button type="button" class="demo-btn" id="fillDemo">Use demo account</button>
-                <button type="button" class="demo-btn" id="guestBtn">Continue as guest</button>
+                <label class="remember"><input type="checkbox" id="remember"> <span data-i18n="login.remember">Remember me</span></label>
+                <button type="button" class="demo-btn" id="fillDemo" data-i18n="login.demo">Use demo account</button>
+                <button type="button" class="demo-btn" id="guestBtn" data-i18n="login.guest">Continue as guest</button>
               </div>
  
               <p id="message" role="alert"></p>
  
-              <button class="submit-btn" type="submit">ENTER THE CLUB <span>→</span></button>
+              <button class="submit-btn" type="submit"><span data-i18n="login.enter">ENTER THE CLUB</span> <span>→</span></button>
  
-              <div class="divider"><span>or continue with</span></div>
+              <div class="divider"><span data-i18n="login.or">or continue with</span></div>
  
               <div class="social">
                 <button type="button" class="social-btn" data-provider="Google" aria-label="Continue with Google">
@@ -136,7 +144,7 @@
               </div>
             </form>
  
-            <p class="fineprint">One club. One passion. <b>Dima Wydad.</b></p>
+            <p class="fineprint"><span data-i18n="login.fine1">One club. One passion.</span> <b data-i18n="login.fine2">Dima Wydad.</b></p>
           </div>
  
         </section>
@@ -150,6 +158,7 @@
  
   </main>
  
+  <script src="js/i18n.js" defer></script>
   <script src="js/login.js" defer></script>
 </body>
 </html>
