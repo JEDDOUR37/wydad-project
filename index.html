@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta name="description" data-i18n-attr="content:site.description" content="Unofficial fan site of Wydad Athletic Club: trophies, transfers 2026, squad, results, quiz and more.">
 <meta name="theme-color" content="#CC0000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wydad Athletic Club — Fan Site" data-i18n-attr="content:site.title">
+<meta property="og:description" content="Unofficial fan site of Wydad Athletic Club." data-i18n-attr="content:site.description">
+<meta name="twitter:card" content="summary">
 <title data-i18n="site.title">Wydad Athletic Club — Fan Site</title>
 <link rel="stylesheet" href="css/style.css">
 <script>
@@ -37,11 +44,12 @@
   </nav>
 
   <div class="header-actions">
-    <select class="lang-select" data-lang-select aria-label="Language" data-i18n-attr="aria-label:lang.aria">
-      <option value="en">EN</option>
-      <option value="fr">FR</option>
-      <option value="ar">عربي</option>
-    </select>
+    <div class="lang-switch" data-lang-switch role="group" aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+      <svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.8 2.6 4.2 5.6 4.2 9s-1.4 6.4-4.2 9c-2.8-2.6-4.2-5.6-4.2-9S9.2 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <button type="button" data-lang="en" lang="en" aria-pressed="true" class="active">EN</button>
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" data-i18n-attr="aria-label:theme.toggle">
       <span class="theme-icon">🌙</span>
     </button>
@@ -259,9 +267,15 @@
 <section class="matches reveal-section" id="results">
   <div class="section-header">
     <span class="section-label" data-i18n="results.label">Botola Pro</span>
-    <h2 class="section-title-lg" data-i18n="results.title">Latest Results</h2>
+    <h2 class="section-title-lg" data-i18n="fixtures.title">Fixtures & Results</h2>
+  </div>
+  <div class="filter" role="tablist">
+    <button type="button" class="active" id="tabResults" role="tab" aria-selected="true" data-tab="results" data-i18n="fixtures.tab.results">Results</button>
+    <button type="button" id="tabFixtures" role="tab" aria-selected="false" data-tab="fixtures" data-i18n="fixtures.tab.upcoming">Fixtures</button>
   </div>
   <div class="matches-container" id="resultsContainer"></div>
+  <div class="matches-container hidden" id="fixturesContainer"></div>
+  <p class="tz-note" data-i18n="fixtures.tz">Kick-off times are shown in Morocco time.</p>
 </section>
 
 <!-- QUIZ -->
@@ -333,56 +347,60 @@
 
   <div class="shop-grid">
 
-    <div class="product-card reveal-item">
+    <div class="product-card reveal-item" data-product="jersey">
       <span class="badge" data-i18n="badge.best">Best Seller</span>
       <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/3.jpg" alt="Home Jersey 2026" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Jersey'">
       <div class="product-info">
         <h3 data-i18n="product.jersey.name">Home Jersey 2026</h3>
         <p data-i18n="product.jersey.desc">Official Wydad Maillot</p>
+        <div class="product-options"></div>
         <div class="product-bottom">
           <span class="price">$59</span>
-          <button class="cart-btn" onclick="addToCart('Home Jersey 2026',59)" data-i18n="shop.add">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Home Jersey 2026',59,this)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal-item">
+    <div class="product-card reveal-item" data-product="cap">
       <span class="badge limited" data-i18n="badge.limited">Limited</span>
       <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/cup.jpg" alt="Wydad Cap" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Cap'">
       <div class="product-info">
         <h3 data-i18n="product.cap.name">Wydad Cap</h3>
         <p data-i18n="product.cap.desc">Premium Cap</p>
+        <div class="product-options"></div>
         <div class="product-bottom">
           <span class="price">$25</span>
-          <button class="cart-btn" onclick="addToCart('Wydad Cap',25)" data-i18n="shop.add">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Wydad Cap',25,this)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal-item">
+    <div class="product-card reveal-item" data-product="mug">
       <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/mug.jpg" alt="Wydad Mug" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Mug'">
       <div class="product-info">
         <h3 data-i18n="product.mug.name">Wydad Mug</h3>
         <p data-i18n="product.mug.desc">Fans Collection</p>
+        <div class="product-options"></div>
         <div class="product-bottom">
           <span class="price">$15</span>
-          <button class="cart-btn" onclick="addToCart('Wydad Mug',15)" data-i18n="shop.add">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Wydad Mug',15,this)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal-item">
+    <div class="product-card reveal-item" data-product="poster">
       <button class="wishlist-btn" aria-label="Add to wishlist" data-i18n-attr="aria-label:wishlist.aria" aria-pressed="false">❤</button>
       <img src="img/poster.jpg" alt="Ultra Poster" onerror="this.src='https://placehold.co/400x300/161616/CC0000?text=Poster'">
       <div class="product-info">
         <h3 data-i18n="product.poster.name">Ultra Poster</h3>
         <p data-i18n="product.poster.desc">Curva Nord Style</p>
+        <div class="product-options"></div>
         <div class="product-bottom">
           <span class="price">$12</span>
-          <button class="cart-btn" onclick="addToCart('Ultra Poster',12)" data-i18n="shop.add">Add To Cart</button>
+          <button class="cart-btn" onclick="addToCart('Ultra Poster',12,this)" data-i18n="shop.add">Add To Cart</button>
         </div>
       </div>
     </div>
@@ -422,16 +440,12 @@
   </div>
 </div>
 
+<button type="button" class="to-top hidden" id="toTop" aria-label="Back to top" data-i18n-attr="aria-label:totop.aria">↑</button>
+
 <footer>
   <span class="footer-logo">Wydad AC</span>
   <p data-i18n="footer.text">© 2026 Unofficial fan project · Not affiliated with Wydad Athletic Club · Casablanca, Morocco</p>
 </footer>
-
-<div class="lang-switch" data-lang-select role="group".....>
-  <button type="button" data-lang-="en" class="active">EN</button>
-  <button type="button" data-lang="fr">FR</button>
-  <button type="button"data-lang="ar">عربي</button>
-</div>
 
 
 <script src="js/i18n.js"></script>

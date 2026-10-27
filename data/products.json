@@ -11,7 +11,7 @@
           {
             "id": "home"
           },
-          {
+           {
             "id": "away"
           },
           {
@@ -33,6 +33,51 @@
           },
           {
             "id": "XL"
+          },
+          {
+            "id": "XXL"
+          }
+        ]
+      },
+      {
+        "id": "print",
+        "choices": [
+          {
+            "id": "none"
+          },
+          {
+            "id": "club"
+          },
+          {
+            "id": "n10"
+          },
+          {
+            "id": "y1937"
+          }
+        ]
+      },
+      {
+        "id": "patch",
+        "choices": [
+          {
+            "id": "none"
+          },
+          {
+            "id": "botola"
+          },
+          {
+            "id": "caf"
+          }
+        ]
+      },
+      {
+        "id": "gift",
+        "choices": [
+          {
+            "id": "no"
+          },
+          {
+            "id": "yes"
           }
         ]
       }
@@ -57,6 +102,42 @@
             "id": "white"
           }
         ]
+      },
+      {
+        "id": "design",
+        "choices": [
+          {
+            "id": "crest"
+          },
+          {
+            "id": "since1937"
+          }
+        ]
+      },
+      {
+        "id": "fit",
+        "choices": [
+          {
+            "id": "snapback"
+          },
+          {
+            "id": "dad"
+          },
+          {
+            "id": "trucker"
+          }
+        ]
+      },
+      {
+        "id": "gift",
+        "choices": [
+          {
+            "id": "no"
+          },
+          {
+            "id": "yes"
+          }
+        ]
       }
     ]
   },
@@ -78,6 +159,42 @@
             "id": "since1937"
           }
         ]
+      },
+      {
+        "id": "color",
+        "choices": [
+          {
+            "id": "white"
+          },
+          {
+            "id": "black"
+          },
+          {
+            "id": "red"
+          }
+        ]
+      },
+      {
+        "id": "capacity",
+        "choices": [
+          {
+            "id": "c330"
+          },
+          {
+            "id": "c450"
+          }
+        ]
+      },
+      {
+        "id": "gift",
+        "choices": [
+          {
+            "id": "no"
+          },
+          {
+            "id": "yes"
+          }
+        ]
       }
     ]
   },
@@ -90,16 +207,49 @@
         "id": "format",
         "choices": [
           {
-            "id": "a3",
-            "price": 12
+            "id": "a3"
           },
           {
-            "id": "a2",
-            "price": 16
+            "id": "a2"
           },
           {
-            "id": "a1",
-            "price": 22
+            "id": "a1"
+          }
+        ]
+      },
+      {
+        "id": "design",
+        "choices": [
+          {
+            "id": "crest"
+          },
+          {
+            "id": "ultras"
+          },
+          {
+            "id": "since1937"
+          }
+        ]
+      },
+      {
+        "id": "finish",
+        "choices": [
+          {
+            "id": "matte"
+          },
+          {
+            "id": "glossy"
+          }
+        ]
+      },
+      {
+        "id": "gift",
+        "choices": [
+          {
+            "id": "no"
+          },
+          {
+            "id": "yes"
           }
         ]
       }

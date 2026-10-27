@@ -328,7 +328,31 @@ footer p{font-size:11px;color:var(--text-muted);letter-spacing:.5px}
 }
 
 /* ===== Language switcher + Arabic (RTL) ===== */
-.lang-select{background:transparent;color:inherit;border:1px solid rgba(128,128,128,.5);border-radius:8px;padding:6px 8px;font:inherit;font-size:.85rem;cursor:pointer}
-.lang-select option{color:#111;background:#fff}
+html[lang="ar"] body,html[lang="ar"] input,html[lang="ar"] button,html[lang="ar"] select{font-family:'Cairo','Inter',sans-serif}
+html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
+
+/* ===== Shop: product options ===== */
+.product-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.opt{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-secondary)}
+.opt-select{background:var(--dark-4);color:var(--text-primary);border:1px solid var(--border);border-radius:8px;padding:7px 8px;font:inherit;font-size:13px;cursor:pointer;width:100%}
+.opt-select:focus{outline:2px solid var(--red);outline-offset:1px}
+.opt-select option{background:var(--dark-4);color:var(--text-primary)}
+.cart-item small{display:block;color:var(--text-secondary);font-size:12px;margin-top:4px;line-height:1.4}
+
 .lang-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--red);border-radius:999px;background:var(--red-dim)}
 .lang-globe{width:16px;height:16px;margin:0 4px;color:var(--red);flex:none}
+.lang-switch button{border:0;background:transparent;color:var(--text-secondary);padding:5px 11px;border-radius:999px;font:inherit;font-size:12px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.lang-switch button:hover{color:var(--text-primary)}
+.lang-switch button.active{background:var(--red);color:#fff;box-shadow:0 2px 10px rgba(204,0,0,.45)}
+.lang-switch button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@media(max-width:600px){.lang-globe{display:none}.lang-switch button{padding:5px 8px;font-size:11px}}
+
+/* ===== Fixtures ===== */
+.match-card.upcoming::before{background:var(--gray)}
+.match-card.upcoming span{background:var(--red-dim);color:var(--red)}
+.tz-note{text-align:center;color:var(--text-muted);font-size:12px;margin-top:14px}
+
+/* ===== Back to top ===== */
+.to-top{position:fixed;bottom:24px;inset-inline-start:24px;z-index:900;width:44px;height:44px;border-radius:50%;border:1px solid var(--border-red);background:var(--red);color:#fff;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);transition:transform .2s,background .2s}
+.to-top:hover{transform:translateY(-3px);background:#ff1a1a}
+.to-top:focus-visible{outline:2px solid #fff;outline-offset:2px}

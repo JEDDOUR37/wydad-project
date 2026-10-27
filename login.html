@@ -4,16 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="login.title">Wydad AC | Login</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta name="theme-color" content="#CC0000">
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
   <div class="lang-corner">
-    <select class="lang-select" data-lang-select aria-label="Language" data-i18n-attr="aria-label:lang.aria">
-      <option value="en">EN</option>
-      <option value="fr">FR</option>
-      <option value="ar">عربي</option>
-    </select>
+    <div class="lang-switch" data-lang-switch role="group" aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+      <svg class="lang-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.8 2.6 4.2 5.6 4.2 9s-1.4 6.4-4.2 9c-2.8-2.6-4.2-5.6-4.2-9S9.2 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <button type="button" data-lang="en" lang="en" aria-pressed="true" class="active">EN</button>
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
   </div>
 
   <main class="scene" id="scene">
@@ -167,3 +172,4 @@
                     </defs>
                 </div>
             </aside>
+     

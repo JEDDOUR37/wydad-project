@@ -1,10 +1,4 @@
 {
   "next": null,
-  "_example": {
-    "competition": "Botola Pro",
-    "home": "Wydad",
-    "away": "Opponent",
-    "dateISO": "2026-11-01T18:00:00+01:00",
-    "venue": "Stade Mohamed V, Casablanca"
-  }
+  "_help": "Optional. Leave next as null: the Match Center uses the first upcoming match of data/fixtures.json."
 }

@@ -142,12 +142,58 @@ function initScrollSpy() {
    Source: FotMob, Botola Pro 2026. Update when new matches are played.
 ========================= */
 let RESULTS = [
-    { home: "Wydad", away: "CODM Meknès", score: "0 – 0", result: "draw", comp: "Botola Pro", date: "2026-10-11" },
-    { home: "Difaâ El Jadida", away: "Wydad", score: "0 – 2", result: "win", comp: "Botola Pro", date: "2026-10-03" },
-    { home: "Wydad", away: "Widad Temara", score: "1 – 3", result: "loss", comp: "Botola Pro", date: "2026-09-26" },
-    { home: "Wydad", away: "Union Touarga", score: "1 – 2", result: "loss", comp: "Botola Pro", date: "2026-07-05" },
+    { round: 4, home: "Wydad", away: "Amal Tiznit", score: "1 – 1", result: "draw", comp: "Botola Pro", date: "2026-10-18" },
+    { round: 3, home: "Wydad", away: "CODM Meknès", score: "0 – 0", result: "draw", comp: "Botola Pro", date: "2026-10-11" },
+    { round: 2, home: "Difaâ El Jadida", away: "Wydad", score: "0 – 2", result: "win", comp: "Botola Pro", date: "2026-10-03" },
+    { round: 1, home: "Wydad", away: "Widad Temara", score: "1 – 3", result: "loss", comp: "Botola Pro", date: "2026-09-26" },
 ];
 const teamName = (name) => TR(name, ["team."]);
+/* =========================
+   FIXTURES  (upcoming matches, from data/fixtures.json)
+========================= */
+let FIXTURES = [];
+const KICKOFF_GRACE_MS = 3 * 60 * 60 * 1000; // keep a match visible for 3 h after kick-off
+function upcomingFixtures() {
+    return FIXTURES
+        .filter((f) => new Date(f.dateISO).getTime() > Date.now() - KICKOFF_GRACE_MS)
+        .sort((a, b) => new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime());
+}
+function fmtDateTime(iso) {
+    return new Date(iso).toLocaleString(currentLocale(), {
+        weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Africa/Casablanca",
+    });
+}
+function renderFixtures() {
+    const container = $("fixturesContainer");
+    if (!container)
+        return;
+    const list = upcomingFixtures();
+    if (list.length === 0) {
+        container.innerHTML = `<p class="tr-empty">${esc(T("fixtures.empty"))}</p>`;
+        return;
+    }
+    container.innerHTML = list.map((f) => `
+        <div class="match-card upcoming reveal-item">
+            <h3>${esc(teamName(f.home))} <bdi>${esc(T("match.vs"))}</bdi> ${esc(teamName(f.away))}</h3>
+            <span>${esc(fmtDateTime(f.dateISO))}</span>
+            <small>${esc(TR(f.competition, ["comp."]))}${f.round ? " · " + esc(T("fixtures.round", { n: f.round })) : ""}${f.venue ? " · " + esc(f.venue) : ""}</small>
+        </div>`).join("");
+    initScrollReveal();
+}
+function initFixtureTabs() {
+    const tabs = document.querySelectorAll("#results [data-tab]");
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            tabs.forEach((t2) => {
+                const on = t2 === tab;
+                t2.classList.toggle("active", on);
+                t2.setAttribute("aria-selected", String(on));
+            });
+            $("resultsContainer")?.classList.toggle("hidden", tab.dataset.tab !== "results");
+            $("fixturesContainer")?.classList.toggle("hidden", tab.dataset.tab !== "fixtures");
+        });
+    });
+}
 function fmtDate(d) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(d))
         return d;
@@ -160,7 +206,7 @@ function renderResults() {
             <div class="match-card ${m.result} reveal-item">
                 <h3>${esc(teamName(m.home))} <bdi>${esc(m.score)}</bdi> ${esc(teamName(m.away))}</h3>
                 <span>${esc(T("result." + m.result))}</span>
-                <small>${esc(TR(m.comp, ["comp."]))} · ${esc(fmtDate(m.date))}</small>
+                <small>${esc(TR(m.comp, ["comp."]))}${m.round ? " · " + esc(T("fixtures.round", { n: m.round })) : ""} · ${esc(fmtDate(m.date))}</small>
             </div>`).join("");
     }
     setText("tickerText", RESULTS.map((m) => `${teamName(m.home)} ${m.score} ${teamName(m.away)}`).join("  ·  "));
@@ -423,7 +469,9 @@ function isCartItem(x) {
     if (typeof x !== "object" || x === null)
         return false;
     const o = x;
-    return typeof o.name === "string" && typeof o.price === "number";
+    const okOptions = o.options === undefined ||
+        (typeof o.options === "object" && o.options !== null && Object.values(o.options).every((v) => typeof v === "string"));
+    return typeof o.name === "string" && typeof o.price === "number" && okOptions;
 }
 function loadCart() {
     try {
@@ -447,8 +495,47 @@ function saveCart() {
 }
 let cart = loadCart();
 let cartNoteKey = "";
-function addToCart(name, price) {
-    cart.push({ name, price });
+/* Options of each product (size, color, ...) come from data/products.json */
+let PRODUCTS = [];
+function renderProductOptions() {
+    document.querySelectorAll(".product-card[data-product]").forEach((card) => {
+        const box = card.querySelector(".product-options");
+        if (!box)
+            return;
+        const product = PRODUCTS.find((p) => p.id === card.dataset.product);
+        const previous = {};
+        box.querySelectorAll("select").forEach((s) => {
+            previous[s.dataset.option ?? ""] = s.value;
+        });
+        box.innerHTML = "";
+        (product?.options ?? []).forEach((opt) => {
+            const label = document.createElement("label");
+            label.className = "opt";
+            const span = document.createElement("span");
+            span.textContent = T(`option.${opt.id}`);
+            const select = document.createElement("select");
+            select.className = "opt-select";
+            select.dataset.option = opt.id;
+            opt.choices.forEach((c) => {
+                const o = document.createElement("option");
+                o.value = c.id;
+                o.textContent = T(`choice.${opt.id}.${c.id}`);
+                select.appendChild(o);
+            });
+            if (previous[opt.id])
+                select.value = previous[opt.id];
+            label.append(span, select);
+            box.appendChild(label);
+        });
+    });
+}
+function addToCart(name, price, btn) {
+    const options = {};
+    btn?.closest(".product-card")?.querySelectorAll(".product-options select").forEach((s) => {
+        if (s.dataset.option)
+            options[s.dataset.option] = s.value;
+    });
+    cart.push(Object.keys(options).length > 0 ? { name, price, options } : { name, price });
     saveCart();
     cartNoteKey = "";
     setText("cartNote", "");
@@ -476,6 +563,13 @@ function updateCart() {
         const price = document.createElement("p");
         price.textContent = `$${item.price}`;
         info.append(title, price);
+        if (item.options) {
+            const details = document.createElement("small");
+            details.textContent = Object.entries(item.options)
+                .map(([k, v]) => `${T(`option.${k}`)}: ${T(`choice.${k}.${v}`)}`)
+                .join(" · ");
+            info.appendChild(details);
+        }
         const remove = document.createElement("button");
         remove.type = "button";
         remove.setAttribute("aria-label", T("cart.remove", { name: shownName }));
@@ -632,8 +726,8 @@ function renderMatchInfo() {
     setText("mcCompetition", TR(mcMatch.competition, ["comp."]));
     setText("mcHome", TR(mcMatch.home, ["team."]));
     setText("mcAway", TR(mcMatch.away, ["team."]));
-    setText("mcVenue", mcMatch.venue);
-    setText("mcDate", new Date(mcTarget).toLocaleString(currentLocale(), { dateStyle: "full", timeStyle: "short" }));
+    setText("mcVenue", mcMatch.venue ?? "");
+    setText("mcDate", new Date(mcTarget).toLocaleString(currentLocale(), { dateStyle: "full", timeStyle: "short", timeZone: "Africa/Casablanca" }));
 }
 function refreshMatchLanguage() {
     renderMatchInfo();
@@ -865,11 +959,28 @@ async function loadJSON(path, fallback) {
     }
 }
 /* =========================
+   BACK TO TOP BUTTON
+========================= */
+function initToTop() {
+    const btn = $("toTop");
+    if (!btn)
+        return;
+    const update = () => btn.classList.toggle("hidden", window.scrollY < 600);
+    window.addEventListener("scroll", update, { passive: true });
+    btn.addEventListener("click", () => {
+        const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: calm ? "auto" : "smooth" });
+    });
+    update();
+}
+/* =========================
    LANGUAGE CHANGE: re-draw everything that JS generated
 ========================= */
 function refreshLanguage() {
     safe("results", renderResults);
+    safe("fixtures", renderFixtures);
     safe("transfers", renderTransfers);
+    safe("shop options", renderProductOptions);
     safe("cart", updateCart);
     if (cartNoteKey)
         setText("cartNote", T(cartNoteKey));
@@ -897,34 +1008,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     await window.I18N?.init();
     safe("theme", initTheme);
     RESULTS = await loadJSON("data/results.json", RESULTS);
+    PRODUCTS = await loadJSON("data/products.json", []);
+    FIXTURES = await loadJSON("data/fixtures.json", []);
     const matchData = await loadJSON("data/match.json", { next: null });
-    window.WYDAD_NEXT_MATCH = matchData.next ?? null;
+    // Match Center: data/match.json (if filled) else the first upcoming match of data/fixtures.json
+    const nextFx = upcomingFixtures().find((f) => new Date(f.dateISO).getTime() > Date.now());
+    window.WYDAD_NEXT_MATCH = matchData.next ?? (nextFx ? { competition: nextFx.competition, home: nextFx.home, away: nextFx.away, venue: nextFx.venue ?? "", dateISO: nextFx.dateISO } : null);
     safe("results", renderResults);
+    safe("fixtures", renderFixtures);
+    safe("fixture tabs", initFixtureTabs);
+    safe("shop options", renderProductOptions);
     safe("transfers", renderTransfers);
     safe("match center", initMatchCenter);
     safe("shop", initShop);
     safe("cart", updateCart);
     safe("scroll reveal", initScrollReveal);
     safe("scroll spy", initScrollSpy);
+    safe("back to top", initToTop);
     void initGuessGame().catch((err) => console.error("[WYDAD] guess game failed:", err));
     appReady = true;
-});// =====================================================
-//  NEXT MATCH  -  the only thing you edit for Match Center
-// -----------------------------------------------------
-//  1) Find the real date/time of the next match (see the "Fixtures" link on the site).
-//  2) Replace the line "window.WYDAD_NEXT_MATCH = null;" by the block in the example below.
-//  3) dateISO format:  YYYY-MM-DDTHH:MM:SS+01:00   (Morocco time; +00:00 during Ramadan)
-//  Until you do, the Match Center shows "date coming soon" (no fake data).
-// =====================================================
-
-window.WYDAD_NEXT_MATCH = null;
-
-// EXAMPLE (NOT a real fixture - replace with the real one):
-//
-// window.WYDAD_NEXT_MATCH = {
-//     competition: "Botola Pro",
-//     home: "Wydad",
-//     away: "Opponent name",
-//     dateISO: "2026-11-01T18:00:00+01:00",
-//     venue: "Stade Mohamed V, Casablanca"
-// };
+});

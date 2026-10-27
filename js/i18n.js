@@ -10,7 +10,7 @@
    - The chosen language is saved in localStorage ("wydad-lang") and
      an event "langchange" is fired on document each time it changes.
    To add a language: create data/lang/xx.json, add it to LANGS below
-   and add an <option value="xx"> to the <select data-lang-select>.
+   and add a <button data-lang="xx"> to the [data-lang-switch] box in the HTML.
 ===================================================== */
 (function () {
     const STORAGE_KEY = "wydad-lang";
@@ -121,7 +121,11 @@
             catch { /* storage unavailable */ }
         }
         applyDom();
-        document.querySelectorAll("[data-lang-select]").forEach((s) => { s.value = code; });
+        document.querySelectorAll("[data-lang-switch] button[data-lang]").forEach((b) => {
+            const on = b.dataset.lang === code;
+            b.classList.toggle("active", on);
+            b.setAttribute("aria-pressed", String(on));
+        });
         document.dispatchEvent(new CustomEvent("langchange", { detail: { lang: code } }));
         return true;
     }
@@ -134,8 +138,8 @@
                 }
                 catch { /* storage unavailable */ }
                 await setLang(saved && saved in LANGS ? saved : DEFAULT_LANG, false);
-                document.querySelectorAll("[data-lang-select]").forEach((sel) => {
-                    sel.addEventListener("change", () => { void setLang(sel.value); });
+                document.querySelectorAll("[data-lang-switch] button[data-lang]").forEach((btn) => {
+                    btn.addEventListener("click", () => { void setLang(btn.dataset.lang ?? DEFAULT_LANG); });
                 });
             })();
         }
