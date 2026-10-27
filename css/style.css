@@ -330,5 +330,5 @@ footer p{font-size:11px;color:var(--text-muted);letter-spacing:.5px}
 /* ===== Language switcher + Arabic (RTL) ===== */
 .lang-select{background:transparent;color:inherit;border:1px solid rgba(128,128,128,.5);border-radius:8px;padding:6px 8px;font:inherit;font-size:.85rem;cursor:pointer}
 .lang-select option{color:#111;background:#fff}
-html[lang="ar"] body,html[lang="ar"] input,html[lang="ar"] button,html[lang="ar"] select{font-family:'Cairo','Inter',sans-serif}
-html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
+.lang-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--red);border-radius:999px;background:var(--red-dim)}
+.lang-globe{width:16px;height:16px;margin:0 4px;color:var(--red);flex:none}

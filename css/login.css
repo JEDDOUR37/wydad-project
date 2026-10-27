@@ -635,10 +635,15 @@ input::placeholder{color:#6a6a6a}
   .grain,.mote{display:none}
 }
 
+.lang-corner{position:fixed;top:14px;inset-inline-end:14px;z-index:100;isolation:isolate}
+.lang-corner .lang-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:2px solid #fff;border-radius:999px;background:#CC0000;box-shadow:0 4px 18px rgba(0,0,0,.55),0 0 0 1px rgba(204,0,0,.6)}
+.lang-corner .lang-globe{width:16px;height:16px;margin:0 4px;color:#fff;flex:none}
+.lang-corner .lang-switch button{border:0;background:transparent;color:rgba(255,255,255,.9);padding:5px 11px;border-radius:999px;font:inherit;font-size:12px;font-weight:700;letter-spacing:.06em;cursor:pointer;transition:background .25s,color .25s}
+.lang-corner .lang-switch button:hover{color:#fff;background:rgba(255,255,255,.18)}
+.lang-corner .lang-switch button.active{background:#fff;color:#CC0000}
+.lang-corner .lang-switch button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 /* ===== Language switcher + Arabic (RTL) ===== */
 .lang-select{background:transparent;color:inherit;border:1px solid rgba(128,128,128,.5);border-radius:8px;padding:6px 8px;font:inherit;font-size:.85rem;cursor:pointer}
 .lang-select option{color:#111;background:#fff}
-html[lang="ar"] body,html[lang="ar"] input,html[lang="ar"] button,html[lang="ar"] select{font-family:'Cairo','Inter',sans-serif}
-html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
-.lang-corner{position:fixed;top:14px;inset-inline-end:14px;z-index:60}
-.lang-corner .lang-select{color:#fff;background:rgba(0,0,0,.45)}
+.lang-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--red);border-radius:999px;background:var(--red-dim)}
+.lang-globe{width:16px;height:16px;margin:0 4px;color:var(--red);flex:none}
