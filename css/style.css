@@ -356,3 +356,107 @@ html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
 .to-top{position:fixed;bottom:24px;inset-inline-start:24px;z-index:900;width:44px;height:44px;border-radius:50%;border:1px solid var(--border-red);background:var(--red);color:#fff;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);transition:transform .2s,background .2s}
 .to-top:hover{transform:translateY(-3px);background:#ff1a1a}
 .to-top:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* ================= X-EXTRAS (cinéma) ================= */
+.x-section{position:relative;max-width:1000px;margin:70px auto;padding:60px 24px;font-family:'Bebas Neue','Cairo',sans-serif;letter-spacing:.5px}
+.x-cine{
+  background:radial-gradient(ellipse at center,rgba(204,0,0,.18) 0%,transparent 65%),linear-gradient(180deg,#0b0b0b 0%,#151515 100%);
+  border-radius:14px;overflow:hidden;color:#f3f3f3;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),0 30px 80px rgba(0,0,0,.6)
+}
+.x-cine::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")
+}
+.x-title{text-align:center;font-size:clamp(2rem,5vw,3.6rem);margin:0 0 14px;color:#fff;text-shadow:0 0 25px rgba(204,0,0,.8)}
+.x-title::after{content:"";display:block;width:90px;height:3px;margin:12px auto 0;background:linear-gradient(90deg,transparent,#CC0000,transparent)}
+.x-sub{text-align:center;opacity:.75;font-family:'Cairo',sans-serif;margin-bottom:26px}
+
+/* TIMELINE */
+.x-timeline{position:relative;padding:20px 0}
+.x-timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,#CC0000,transparent);transform:translateX(-50%)}
+.x-tl-item{
+  position:relative;width:44%;padding:18px 22px;margin:34px 0;background:rgba(255,255,255,.04);
+  border:1px solid rgba(204,0,0,.5);border-radius:10px;backdrop-filter:blur(4px);
+  opacity:0;transform:translateY(40px) scale(.97);
+  transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)
+}
+.x-tl-item.x-visible{opacity:1;transform:none}
+.x-tl-item:nth-child(odd){left:0}
+.x-tl-item:nth-child(even){left:56%}
+.x-tl-item::before{content:"";position:absolute;top:26px;width:14px;height:14px;border-radius:50%;background:#CC0000;box-shadow:0 0 14px 4px rgba(204,0,0,.8)}
+.x-tl-item:nth-child(odd)::before{right:-8.4%}
+.x-tl-item:nth-child(even)::before{left:-8.4%}
+.x-tl-year{display:block;font-size:3rem;line-height:1;margin-bottom:8px;color:transparent;-webkit-text-stroke:1.5px #CC0000}
+.x-tl-item p{margin:0;font-family:'Cairo',sans-serif;letter-spacing:0;line-height:1.6}
+
+/* FANS / ULTRAS / 2005 */
+.x-fans::before{content:"";position:absolute;top:0;left:0;right:0;height:22px;background:#000;z-index:2}
+.x-tabs{position:relative;z-index:3;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
+.x-tabs button{
+  padding:8px 20px;border:1px solid rgba(204,0,0,.5);border-radius:100px;background:transparent;color:#ddd;
+  cursor:pointer;font:inherit;font-size:1.05rem;transition:background .2s,color .2s
+}
+.x-tabs button:hover{background:rgba(204,0,0,.2)}
+.x-tabs button.active{background:#CC0000;color:#fff;border-color:#CC0000}
+.x-gallery{position:relative;z-index:3;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.x-gallery figure{
+  margin:0;position:relative;overflow:hidden;border-radius:8px;cursor:zoom-in;aspect-ratio:4/3;background:#000;
+  opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s
+}
+.x-gallery figure[hidden]{display:none}
+.x-gallery figure.x-visible{opacity:1;transform:none}
+.x-gallery img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.1) contrast(1.05);transition:transform .6s ease,filter .6s}
+.x-gallery figure:hover img{transform:scale(1.08);filter:saturate(1.3) contrast(1.1)}
+.x-gallery figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:30px 12px 10px;
+  background:linear-gradient(transparent,rgba(0,0,0,.85));font-family:'Cairo',sans-serif;font-size:.9rem;letter-spacing:0
+}
+
+/* WINNERS 2005 */
+.x-winners{position:relative;z-index:3;text-align:center;margin-top:60px;padding:30px 10px;border-top:1px solid rgba(204,0,0,.5)}
+.x-big-year{display:block;font-size:clamp(5rem,18vw,11rem);line-height:.9;color:transparent;-webkit-text-stroke:2px #CC0000;opacity:.85}
+.x-winners h3{font-size:2rem;margin:6px 0 12px}
+.x-winners p{max-width:720px;margin:0 auto;font-family:'Cairo',sans-serif;letter-spacing:0;line-height:1.8;opacity:.9}
+
+/* LIGHTBOX */
+#x-lightbox{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.92);cursor:zoom-out}
+#x-lightbox.x-open{display:flex}
+#x-lightbox img{max-width:92vw;max-height:90vh;border-radius:8px;box-shadow:0 0 60px rgba(204,0,0,.5)}
+
+/* VOTE */
+.x-vote-list{display:grid;gap:12px;position:relative;z-index:3}
+.x-vote-row{position:relative;border:1px solid rgba(204,0,0,.6);border-radius:8px;overflow:hidden}
+.x-vote-bar{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,rgba(204,0,0,.55),rgba(204,0,0,.15));transition:width .8s}
+[dir="rtl"] .x-vote-bar{inset:0 0 0 auto}
+.x-vote-content{position:relative;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-family:'Cairo',sans-serif;letter-spacing:0}
+.x-vote-btn{padding:6px 18px;border:0;border-radius:6px;background:#CC0000;color:#fff;cursor:pointer;font-weight:700;font-family:inherit}
+.x-vote-btn:disabled{opacity:.35;cursor:not-allowed}
+.x-vote-info{text-align:center;opacity:.7;margin-top:14px;font-family:'Cairo',sans-serif;letter-spacing:0}
+
+/* LIVRE D'OR */
+.x-gb-form{position:relative;z-index:3;display:flex;flex-direction:column;gap:10px;margin-bottom:25px}
+.x-gb-form input,.x-gb-form textarea{padding:12px;border:1px solid rgba(204,0,0,.6);border-radius:8px;background:rgba(255,255,255,.05);color:#fff;font:1rem 'Cairo',sans-serif}
+.x-gb-form button{align-self:flex-start;padding:10px 28px;border:0;border-radius:8px;background:#CC0000;color:#fff;font:700 1.1rem 'Bebas Neue','Cairo',sans-serif;cursor:pointer}
+.x-gb-form button:hover{filter:brightness(1.2)}
+.x-gb-list{position:relative;z-index:3;list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.x-gb-list li{padding:12px 16px;border-left:4px solid #CC0000;background:rgba(255,255,255,.05);border-radius:6px;font-family:'Cairo',sans-serif;letter-spacing:0}
+[dir="rtl"] .x-gb-list li{border-left:0;border-right:4px solid #CC0000}
+.x-gb-list b{color:#ff4d6a}
+.x-gb-list p{margin:4px 0}
+.x-gb-list small{opacity:.55}
+
+/* LOADER + PROGRESS */
+#x-loader{position:fixed;inset:0;z-index:20000;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity .6s,visibility .6s}
+#x-loader.x-hide{opacity:0;visibility:hidden}
+.x-ball{font-size:3.5rem;animation:x-spin 1s linear infinite;filter:drop-shadow(0 0 18px #CC0000)}
+@keyframes x-spin{to{transform:rotate(360deg)}}
+#x-progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#CC0000,#ff4d6a);z-index:10001;box-shadow:0 0 10px #CC0000}
+
+/* MOBILE X */
+@media (max-width:700px){
+  .x-section{padding:40px 14px;margin:40px 10px}
+  .x-timeline::before{left:10px}
+  .x-tl-item,.x-tl-item:nth-child(even){width:auto;left:0;margin-left:32px}
+  .x-tl-item::before,.x-tl-item:nth-child(even)::before{left:-28px;right:auto}
+}

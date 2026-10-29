@@ -17,10 +17,14 @@
 <script>
   if (sessionStorage.getItem("wydadDemoLoggedIn") !== "true") {
     window.location.replace("login.html");
+    
   }
 </script>
 </head>
 <body>
+
+<div id="x-loader"><div class="x-ball">⚽</div></div>
+<div id="x-progress"></div>
 
 <header>
   <div class="logo">
@@ -447,8 +451,60 @@
   <p data-i18n="footer.text">© 2026 Unofficial fan project · Not affiliated with Wydad Athletic Club · Casablanca, Morocco</p>
 </footer>
 
+<!-- ===== HISTOIRE ===== -->
+<section id="x-history" class="x-section x-cine">
+  <h2 class="x-title" data-xi="histTitle"></h2>
+  <div class="x-timeline">
+    <div class="x-tl-item"><span class="x-tl-year">1937</span><p data-xi="h1937"></p></div>
+    <div class="x-tl-item"><span class="x-tl-year">1992</span><p data-xi="h1992"></p></div>
+    <div class="x-tl-item"><span class="x-tl-year">2017</span><p data-xi="h2017"></p></div>
+    <div class="x-tl-item"><span class="x-tl-year">2022</span><p data-xi="h2022"></p></div>
+  </div>
+</section>
+
+<!-- ===== FANS + ULTRAS + 2005 ===== -->
+<section id="x-fans" class="x-section x-cine x-fans">
+  <h2 class="x-title" data-xi="fansTitle"></h2>
+  <p class="x-sub" data-xi="fansSub"></p>
+
+  <div class="x-tabs" id="x-tabs">
+    <button type="button" class="active" data-f="all" data-xi="tabAll"></button>
+    <button type="button" data-f="fans" data-xi="tabFans"></button>
+    <button type="button" data-f="ultras" data-xi="tabUltras"></button>
+    <button type="button" data-f="y2005" data-xi="tab2005"></button>
+  </div>
+
+  <div id="x-gallery" class="x-gallery"></div>
+
+  <div class="x-winners">
+    <span class="x-big-year">2005</span>
+    <h3 data-xi="winTitle"></h3>
+    <p data-xi="winText"></p>
+  </div>
+</section>
+
+<!-- ===== HALL OF FAME ===== -->
+<section id="x-vote" class="x-section x-cine">
+  <h2 class="x-title" data-xi="voteTitle"></h2>
+  <div id="x-vote-list" class="x-vote-list"></div>
+  <p id="x-vote-info" class="x-vote-info"></p>
+</section>
+
+<!-- ===== LIVRE D'OR ===== -->
+<section id="x-guestbook" class="x-section x-cine">
+  <h2 class="x-title" data-xi="gbTitle"></h2>
+  <div class="x-gb-form">
+    <input id="x-gb-name" type="text" maxlength="30" data-xi-ph="gbName">
+    <textarea id="x-gb-msg" maxlength="200" rows="3" data-xi-ph="gbMsg"></textarea>
+    <button id="x-gb-send" type="button" data-xi="gbSend"></button>
+  </div>
+  <ul id="x-gb-list" class="x-gb-list"></ul>
+</section>
+
+<div id="x-lightbox"><img alt=""></div>
 
 <script src="js/i18n.js"></script>
 <script src="js/app.js"></script>
+<script src="js/x-extras.js"></script>
 </body>
 </html>
