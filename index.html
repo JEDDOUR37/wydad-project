@@ -42,6 +42,7 @@
     <a href="#transfers" data-i18n="nav.transfers">Transfers</a>
     <a href="#players-static" data-i18n="nav.squad">Squad</a>
     <a href="#results" data-i18n="nav.results">Results</a>
+    <a href="#x-standings" data-xi="navStandings">Table</a>
     <a href="#quiz" data-i18n="nav.quiz">Quiz</a>
     <a href="#guess" data-i18n="nav.game">Game</a>
     <a href="#shop" data-i18n="nav.shop">Shop</a>
@@ -282,6 +283,32 @@
   <p class="tz-note" data-i18n="fixtures.tz">Kick-off times are shown in Morocco time.</p>
 </section>
 
+<!-- CLASSEMENT BOTOLA PRO (filled by JS from data/standings.json) -->
+<section id="x-standings" class="x-section x-cine">
+  <h2 class="x-title" data-xi="stTitle"></h2>
+  <p class="x-sub" data-xi="stSub"></p>
+  <div class="x-table-wrap">
+    <table class="x-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th data-xi="stTeam"></th>
+          <th data-xi="stP"></th>
+          <th data-xi="stW"></th>
+          <th data-xi="stD"></th>
+          <th data-xi="stL"></th>
+          <th data-xi="stGF"></th>
+          <th data-xi="stGA"></th>
+          <th data-xi="stGD"></th>
+          <th data-xi="stPts"></th>
+        </tr>
+      </thead>
+      <tbody id="x-st-body"></tbody>
+    </table>
+  </div>
+  <p class="x-sub" id="x-st-updated"></p>
+</section>
+
 <!-- QUIZ -->
 <section class="quiz-section reveal-section" id="quiz">
   <div class="section-header">
@@ -462,27 +489,6 @@
   </div>
 </section>
 
-<!-- ===== FANS + ULTRAS + 2005 ===== -->
-<section id="x-fans" class="x-section x-cine x-fans">
-  <h2 class="x-title" data-xi="fansTitle"></h2>
-  <p class="x-sub" data-xi="fansSub"></p>
-
-  <div class="x-tabs" id="x-tabs">
-    <button type="button" class="active" data-f="all" data-xi="tabAll"></button>
-    <button type="button" data-f="fans" data-xi="tabFans"></button>
-    <button type="button" data-f="ultras" data-xi="tabUltras"></button>
-    <button type="button" data-f="y2005" data-xi="tab2005"></button>
-  </div>
-
-  <div id="x-gallery" class="x-gallery"></div>
-
-  <div class="x-winners">
-    <span class="x-big-year">2005</span>
-    <h3 data-xi="winTitle"></h3>
-    <p data-xi="winText"></p>
-  </div>
-</section>
-
 <!-- ===== HALL OF FAME ===== -->
 <section id="x-vote" class="x-section x-cine">
   <h2 class="x-title" data-xi="voteTitle"></h2>
@@ -500,8 +506,6 @@
   </div>
   <ul id="x-gb-list" class="x-gb-list"></ul>
 </section>
-
-<div id="x-lightbox"><img alt=""></div>
 
 <script src="js/i18n.js"></script>
 <script src="js/app.js"></script>

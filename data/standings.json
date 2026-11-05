@@ -1,0 +1,22 @@
+{
+  "updated": "2026-11-05",
+  "source": "FotMob",
+  "table": [
+    { "pos": 1,  "team": "KACM",                     "p": 6, "w": 4, "d": 1, "l": 1, "gf": 8,  "ga": 5,  "pts": 13 },
+    { "pos": 2,  "team": "CODM Meknès",              "p": 6, "w": 3, "d": 2, "l": 1, "gf": 9,  "ga": 4,  "pts": 11 },
+    { "pos": 3,  "team": "Wydad Casablanca",         "p": 6, "w": 3, "d": 2, "l": 1, "gf": 6,  "ga": 4,  "pts": 11 },
+    { "pos": 4,  "team": "Ittihad Tanger",           "p": 6, "w": 3, "d": 1, "l": 2, "gf": 8,  "ga": 7,  "pts": 10 },
+    { "pos": 5,  "team": "Widad Temara",             "p": 6, "w": 3, "d": 0, "l": 3, "gf": 7,  "ga": 4,  "pts": 9 },
+    { "pos": 6,  "team": "Raja Casablanca",          "p": 6, "w": 2, "d": 3, "l": 1, "gf": 5,  "ga": 5,  "pts": 9 },
+    { "pos": 7,  "team": "Hassania Agadir",          "p": 6, "w": 2, "d": 2, "l": 2, "gf": 12, "ga": 10, "pts": 8 },
+    { "pos": 8,  "team": "FAR Rabat",                "p": 5, "w": 2, "d": 2, "l": 1, "gf": 6,  "ga": 4,  "pts": 8 },
+    { "pos": 9,  "team": "Difaâ El Jadida",          "p": 6, "w": 2, "d": 2, "l": 2, "gf": 13, "ga": 13, "pts": 8 },
+    { "pos": 10, "team": "MAS Fès",                  "p": 6, "w": 2, "d": 2, "l": 2, "gf": 5,  "ga": 5,  "pts": 8 },
+    { "pos": 11, "team": "FUS Rabat",                "p": 6, "w": 2, "d": 2, "l": 2, "gf": 4,  "ga": 4,  "pts": 8 },
+    { "pos": 12, "team": "Union Touarga Sport",      "p": 6, "w": 2, "d": 2, "l": 2, "gf": 4,  "ga": 4,  "pts": 8 },
+    { "pos": 13, "team": "RS Berkane",               "p": 5, "w": 1, "d": 4, "l": 0, "gf": 4,  "ga": 2,  "pts": 7 },
+    { "pos": 14, "team": "US Amal Tiznit",           "p": 6, "w": 1, "d": 1, "l": 4, "gf": 6,  "ga": 12, "pts": 4 },
+    { "pos": 15, "team": "MAT Tetouan",              "p": 6, "w": 0, "d": 3, "l": 3, "gf": 2,  "ga": 9,  "pts": 3 },
+    { "pos": 16, "team": "Renaissance Club Zemamra", "p": 6, "w": 0, "d": 1, "l": 5, "gf": 5,  "ga": 12, "pts": 1 }
+  ]
+}

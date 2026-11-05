@@ -2,51 +2,48 @@
   /* ========== TRADUCTIONS ========== */
   const XT = {
     fr: {
+      navStandings: 'Classement',
       histTitle: 'Histoire du Wydad',
       h1937: 'Fondation du Wydad Athletic Club à Casablanca.',
       h1992: 'Premier sacre africain du club.',
       h2017: 'Nouveau titre de champion d\'Afrique.',
       h2022: 'Encore une fois champion d\'Afrique.',
-      fansTitle: 'Les Fans et les Ultras',
-      fansSub: 'Les images des supporters qui font vivre le club.',
-      tabAll: 'Tout', tabFans: 'Supporters', tabUltras: 'Ultras', tab2005: 'Champions 2005',
-      capFans: 'Les supporters du Wydad', capUltras: 'Les Ultras en action', cap2005: 'Champions 2005',
-      winTitle: 'Les Champions 2005',
-      winText: 'Écris ici l\'histoire de la saison 2005 : le parcours, les joueurs, les matchs importants et la fête avec les supporters.',
+      stTitle: 'Classement Botola Pro', stSub: 'Saison 2026/2027',
+      stTeam: 'Équipe', stP: 'J', stW: 'G', stD: 'N', stL: 'D', stGF: 'BP', stGA: 'BC', stGD: 'Diff', stPts: 'Pts',
+      stUpdated: 'Dernière mise à jour :', stSource: 'Source :',
+      stError: 'Classement indisponible pour le moment.',
       voteTitle: 'Hall of Fame : vote pour ton joueur',
       voteBtn: 'Voter', voteThanks: 'Merci pour ton vote !', voteOnce: 'Un seul vote par personne.',
       gbTitle: 'Livre d\'or', gbName: 'Ton nom', gbMsg: 'Écris ton message...',
       gbSend: 'Envoyer', gbAlert: 'Écris ton nom et ton message'
     },
     en: {
+      navStandings: 'Table',
       histTitle: 'History of Wydad',
       h1937: 'Foundation of Wydad Athletic Club in Casablanca.',
       h1992: 'The club\'s first African title.',
       h2017: 'Another African champions title.',
       h2022: 'African champions once again.',
-      fansTitle: 'Fans and Ultras',
-      fansSub: 'Pictures of the supporters who keep the club alive.',
-      tabAll: 'All', tabFans: 'Fans', tabUltras: 'Ultras', tab2005: '2005 Champions',
-      capFans: 'Wydad supporters', capUltras: 'Ultras in action', cap2005: '2005 Champions',
-      winTitle: 'The 2005 Champions',
-      winText: 'Write the story of the 2005 season here: the journey, the players, the key matches and the celebration with the fans.',
+      stTitle: 'Botola Pro Table', stSub: 'Season 2026/2027',
+      stTeam: 'Team', stP: 'P', stW: 'W', stD: 'D', stL: 'L', stGF: 'GF', stGA: 'GA', stGD: 'GD', stPts: 'Pts',
+      stUpdated: 'Last update:', stSource: 'Source:',
+      stError: 'Standings unavailable right now.',
       voteTitle: 'Hall of Fame: vote for your player',
       voteBtn: 'Vote', voteThanks: 'Thanks for your vote!', voteOnce: 'One vote per person.',
       gbTitle: 'Guestbook', gbName: 'Your name', gbMsg: 'Write your message...',
       gbSend: 'Send', gbAlert: 'Enter your name and message'
     },
     ar: {
+      navStandings: 'الترتيب',
       histTitle: 'تاريخ الوداد',
       h1937: 'تأسيس نادي الوداد الرياضي بالدار البيضاء.',
       h1992: 'أول لقب إفريقي للنادي.',
       h2017: 'لقب إفريقي جديد.',
       h2022: 'بطل إفريقيا مرة أخرى.',
-      fansTitle: 'الجماهير والألتراس',
-      fansSub: 'صور الجماهير التي تُحيي النادي.',
-      tabAll: 'الكل', tabFans: 'الجماهير', tabUltras: 'الألتراس', tab2005: 'أبطال 2005',
-      capFans: 'جماهير الوداد', capUltras: 'الألتراس في الميدان', cap2005: 'أبطال 2005',
-      winTitle: 'أبطال 2005',
-      winText: 'اكتب هنا قصة موسم 2005: المسار، اللاعبون، المباريات المهمة، والاحتفال مع الجماهير.',
+      stTitle: 'ترتيب البطولة الاحترافية', stSub: 'موسم 2026/2027',
+      stTeam: 'الفريق', stP: 'لعب', stW: 'فوز', stD: 'تعادل', stL: 'خسارة', stGF: 'له', stGA: 'عليه', stGD: 'فارق', stPts: 'نقاط',
+      stUpdated: 'آخر تحديث:', stSource: 'المصدر:',
+      stError: 'الترتيب غير متاح حاليا.',
       voteTitle: 'قاعة المشاهير: صوّت للاعبك',
       voteBtn: 'صوّت', voteThanks: 'شكراً على تصويتك!', voteOnce: 'صوت واحد لكل شخص.',
       gbTitle: 'سجل الزوار', gbName: 'اسمك', gbMsg: 'اكتب رسالتك...',
@@ -90,7 +87,7 @@
     if (bar) bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
   }, { passive: true });
 
-  /* ========== REVEAL ANIMATION ========== */
+  /* ========== REVEAL ANIMATION (timeline) ========== */
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
@@ -102,53 +99,62 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.x-tl-item').forEach((el) => revealObs.observe(el));
 
-  /* ========== GALERIE: FANS / ULTRAS / 2005 ========== */
-  // Kol tswira f star wa7ed. Types: 'fans' | 'ultras' | 'y2005'
-  const PHOTOS = [
-    { type: 'fans',   src: 'img/WYDAD/FANS1.JPEG',   cap: 'capFans' },
-    { type: 'ultras', src: 'img/WYDAD/FANS2.JPEG', cap: 'capUltras' },
-    { type: 'ultras', src: 'img/WYDAD/FANS3.JPEG', cap: 'capUltras' }
-    
-  ];
-  const gallery = document.getElementById('x-gallery');
-  const lightbox = document.getElementById('x-lightbox');
-  const tabs = document.querySelectorAll('#x-tabs button');
+  /* ========== CLASSEMENT BOTOLA PRO (data/standings.json) ========== */
+  const stBody = document.getElementById('x-st-body');
+  const stUpdated = document.getElementById('x-st-updated');
+  let ST = null;
 
-  if (gallery) {
-    PHOTOS.forEach((g, i) => {
-      const fig = document.createElement('figure');
-      fig.dataset.type = g.type;
-      fig.dataset.delay = (i % 6) * 100;
-      const img = document.createElement('img');
-      img.src = g.src; img.loading = 'lazy'; img.alt = '';
-      img.onerror = () => fig.remove();   // ila tswira ma kaynach, kat7yed
-      const cap = document.createElement('figcaption');
-      cap.dataset.xi = g.cap;
-      cap.textContent = t(g.cap);
-      fig.append(img, cap);
-      fig.addEventListener('click', () => {
-        lightbox.querySelector('img').src = g.src;
-        lightbox.classList.add('x-open');
-      });
-      gallery.appendChild(fig);
-      revealObs.observe(fig);
+  function stRender() {
+    if (!stBody) return;
+    stBody.innerHTML = '';
+
+    if (!ST || !Array.isArray(ST.table)) {
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = 10;
+      td.textContent = t('stError');
+      tr.appendChild(td);
+      stBody.appendChild(tr);
+      if (stUpdated) stUpdated.textContent = '';
+      return;
+    }
+
+    ST.table.slice().sort((a, b) => a.pos - b.pos).forEach((row) => {
+      const tr = document.createElement('tr');
+      if (/^wydad( casablanca)?$/i.test(row.team)) tr.className = 'x-me';
+      const cell = (txt, cls) => {
+        const td = document.createElement('td');
+        td.textContent = txt;
+        if (cls) td.className = cls;
+        tr.appendChild(td);
+      };
+      const gd = row.gf - row.ga;
+      cell(row.pos);
+      cell(row.team);
+      cell(row.p); cell(row.w); cell(row.d); cell(row.l);
+      cell(row.gf); cell(row.ga);
+      cell(gd > 0 ? '+' + gd : String(gd), gd > 0 ? 'x-gd-pos' : (gd < 0 ? 'x-gd-neg' : ''));
+      cell(row.pts, 'x-pts');
+      stBody.appendChild(tr);
     });
 
-    tabs.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        tabs.forEach((b) => b.classList.toggle('active', b === btn));
-        const f = btn.dataset.f;
-        gallery.querySelectorAll('figure').forEach((fig) => {
-          const show = f === 'all' || fig.dataset.type === f;
-          fig.hidden = !show;
-          if (show) fig.classList.add('x-visible');
-        });
-      });
-    });
+    if (stUpdated) {
+      let txt = '';
+      if (ST.updated) {
+        const d = new Date(ST.updated + 'T12:00:00');
+        const when = isNaN(d) ? ST.updated : d.toLocaleDateString(LOCALE[LANG], { day: 'numeric', month: 'long', year: 'numeric' });
+        txt = t('stUpdated') + ' ' + when;
+      }
+      if (ST.source) txt += (txt ? ' · ' : '') + t('stSource') + ' ' + ST.source;
+      stUpdated.textContent = txt;
+    }
   }
-  if (lightbox) {
-    lightbox.addEventListener('click', () => lightbox.classList.remove('x-open'));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('x-open'); });
+
+  if (stBody) {
+    fetch('data/standings.json', { cache: 'no-store' })
+      .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then((j) => { ST = j; stRender(); })
+      .catch((e) => { console.warn('[X] standings.json:', e); stRender(); });
   }
 
   /* ========== LIVRE D'OR ========== */
@@ -232,6 +238,6 @@
   }
 
   /* ========== INIT ========== */
-  document.addEventListener('x-lang', () => { gbRender(); voteRender(); });
+  document.addEventListener('x-lang', () => { gbRender(); voteRender(); stRender(); });
   applyLang();
 })();

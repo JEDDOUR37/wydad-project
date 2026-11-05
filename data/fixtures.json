@@ -1,9 +1,9 @@
 [
   {
-    "round": 5,
-    "dateISO": "2026-10-31T18:00:00+01:00",
+    "home": "KACM",
+    "away": "Wydad",
     "competition": "Botola Pro",
-    "home": "Wydad",
-    "away": "Moghreb Tétouan"
+    "round": 7,
+    "dateISO": "2026-11-07T17:00:00+01:00"
   }
 ]

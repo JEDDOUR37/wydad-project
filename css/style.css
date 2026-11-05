@@ -459,4 +459,15 @@ html[lang="ar"] *{letter-spacing:0 !important;text-transform:none !important}
   .x-timeline::before{left:10px}
   .x-tl-item,.x-tl-item:nth-child(even){width:auto;left:0;margin-left:32px}
   .x-tl-item::before,.x-tl-item:nth-child(even)::before{left:-28px;right:auto}
-}
+}/* ===== CLASSEMENT ===== */
+.x-table-wrap{position:relative;z-index:3;overflow-x:auto}
+.x-table{width:100%;border-collapse:collapse;font-family:'Cairo',sans-serif;letter-spacing:0;min-width:520px}
+.x-table th,.x-table td{padding:10px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);white-space:nowrap}
+.x-table th{font-size:.8rem;opacity:.7}
+.x-table th:nth-child(2),.x-table td:nth-child(2){text-align:start;width:100%}
+.x-table tbody tr:hover{background:rgba(255,255,255,.04)}
+.x-table tr.x-me{background:rgba(204,0,0,.22);box-shadow:inset 3px 0 0 #CC0000;font-weight:700}
+[dir="rtl"] .x-table tr.x-me{box-shadow:inset -3px 0 0 #CC0000}
+.x-table td.x-pts{font-weight:800;color:#fff}
+.x-gd-pos{color:#4ade80}
+.x-gd-neg{color:#f87171}

@@ -1,38 +1,8 @@
 [
-  {
-    "round": 4,
-    "home": "Wydad",
-    "away": "Amal Tiznit",
-    "score": "1 – 1",
-    "result": "draw",
-    "comp": "Botola Pro",
-    "date": "2026-10-18"
-  },
-  {
-    "round": 3,
-    "home": "Wydad",
-    "away": "CODM Meknès",
-    "score": "0 – 0",
-    "result": "draw",
-    "comp": "Botola Pro",
-    "date": "2026-10-11"
-  },
-  {
-    "round": 2,
-    "home": "Difaâ El Jadida",
-    "away": "Wydad",
-    "score": "0 – 2",
-    "result": "win",
-    "comp": "Botola Pro",
-    "date": "2026-10-03"
-  },
-  {
-    "round": 1,
-    "home": "Wydad",
-    "away": "Widad Temara",
-    "score": "1 – 3",
-    "result": "loss",
-    "comp": "Botola Pro",
-    "date": "2026-09-26"
-  }
+  { "round": 6, "home": "Wydad", "away": "MAT Tetouan", "score": "1 – 0", "result": "win", "comp": "Botola Pro", "date": "2026-10-31" },
+  { "round": 5, "home": "Union Touarga Sport", "away": "Wydad", "score": "0 – 1", "result": "win", "comp": "Botola Pro", "date": "2026-10-24" },
+  { "round": 4, "home": "Wydad", "away": "Amal Tiznit", "score": "1 – 1", "result": "draw", "comp": "Botola Pro", "date": "2026-10-18" },
+  { "round": 3, "home": "Wydad", "away": "CODM Meknès", "score": "0 – 0", "result": "draw", "comp": "Botola Pro", "date": "2026-10-11" },
+  { "round": 2, "home": "Difaâ El Jadida", "away": "Wydad", "score": "0 – 2", "result": "win", "comp": "Botola Pro", "date": "2026-10-03" },
+  { "round": 1, "home": "Wydad", "away": "Widad Temara", "score": "1 – 3", "result": "loss", "comp": "Botola Pro", "date": "2026-09-26" }
 ]
